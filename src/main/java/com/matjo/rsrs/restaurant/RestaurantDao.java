@@ -40,4 +40,6 @@ public class RestaurantDao {
 			e.printStackTrace();
 		}
 	}
+	
+//	public Restaurant findResByCondition(String)
 }
