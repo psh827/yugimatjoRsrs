@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.matjo.rsrs.ambiance.Ambiance;
 import com.matjo.rsrs.data.DataSource;
@@ -17,9 +19,9 @@ public class RestaurantDao {
 		dataSource = (DataSource)namingService.getAttribute("dataSource");
 	}
 	public void addRes(Restaurant res) {
-		String sql = "INSERT INTO Restaurant(resName, resLocation, resScore, "
+		String sql = "INSERT INTO Restaurant(resName, resScore, "
 				+ " foodType, foodPrice, resCapacity) "
-				+ " VALUES (?, ?, ?, ?, ?, ?)";
+				+ " VALUES (?, ?, ?, ?, ?)";
 		
 		try {
 			Connection con = null;
@@ -28,11 +30,10 @@ public class RestaurantDao {
 				con = dataSource.getConnection();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, res.getResName());
-				pstmt.setString(2, res.getResLocation());
-				pstmt.setDouble(3, res.getResScore());
-				pstmt.setString(4, res.getFoodType());
-				pstmt.setInt(5, res.getFoodPrice());
-				pstmt.setInt(6, res.getResCapacity());
+				pstmt.setDouble(2, res.getResScore());
+				pstmt.setString(3, res.getFoodType());
+				pstmt.setInt(4, res.getFoodPrice());
+				pstmt.setInt(5, res.getResCapacity());
 				pstmt.execute();
 				System.out.println("INSERTED...");
 			} finally {
@@ -43,9 +44,10 @@ public class RestaurantDao {
 		}
 	}
 	
-	public Restaurant findResByCondition(String resLocation, String foodType, int foodPrice, int resCapacity, String ambiance) {
-		String sql = "Select r.*, ab.* FROM Restaurant r INNER JOIN Ambiance ab ON res.rId = ab.aId WHERE r.resLocation=? AND r.foodType=? "
+	public List<Restaurant> findResByCondition(String resLocation, String foodType, int foodPrice, int resCapacity, String ambiance) {
+		String sql = "Select r.*, ab.* FROM Restaurant r INNER JOIN Ambiance ab ON r.rId = ab.aId INNER JOIN Location lo ON r.rId = lo.resId WHERE lo.resLocation=? AND r.foodType=? "
 				+ "AND r.foodPrice=? AND r.resCapacity=?";
+		List<Restaurant> list = new ArrayList<>();
 		try {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -66,7 +68,7 @@ public class RestaurantDao {
 					res.setFoodPrice(rs.getInt("foodPrice"));
 					res.setResCapacity(rs.getInt("resCapacity"));
 					res.setAmbiance(new Ambiance());
-					return res;
+					list.add(res);
 				}
 				
 			} finally {
@@ -79,6 +81,6 @@ public class RestaurantDao {
 		
 		
 		
-		return restaurant;
+		return list;
 	}
 }

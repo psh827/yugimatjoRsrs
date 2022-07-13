@@ -85,6 +85,6 @@ CREATE TABLE Ambiance (
 
 
 
-
+DROP TABLE Restaurant;
 
 

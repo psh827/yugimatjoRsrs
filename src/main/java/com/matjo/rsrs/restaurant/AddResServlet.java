@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.matjo.rsrs.location.Location;
+
 
 /**
  * Servlet implementation class AddResServlet
@@ -51,7 +53,7 @@ public class AddResServlet extends HttpServlet {
 		}
 		Restaurant restaurant = new Restaurant();
 		restaurant.setResName(resName);
-		restaurant.setResLocation(resLocation);
+		restaurant.setLocation(new Location(resLocation));
 		restaurant.setResScore(Double.parseDouble(resScore));
 		restaurant.setFoodType(foodType);
 		restaurant.setFoodPrice(Integer.parseInt(foodPrice));

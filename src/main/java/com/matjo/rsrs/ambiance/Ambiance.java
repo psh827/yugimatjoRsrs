@@ -86,6 +86,36 @@ public class Ambiance {
 	public void setAmbiance(Ambiance ambiance) {
 		this.ambiance = ambiance;
 	}
+	public double getComfortAvgScroe() {
+		return comfortAvgScroe;
+	}
+	public void setComfortAvgScroe(double comfortAvgScroe) {
+		this.comfortAvgScroe = comfortAvgScroe;
+	}
+	public double getLuxuryAvgScore() {
+		return luxuryAvgScore;
+	}
+	public void setLuxuryAvgScore(double luxuryAvgScore) {
+		this.luxuryAvgScore = luxuryAvgScore;
+	}
+	public double getCostAvgScore() {
+		return costAvgScore;
+	}
+	public void setCostAvgScore(double costAvgScore) {
+		this.costAvgScore = costAvgScore;
+	}
+	public double getDatingAvgScore() {
+		return datingAvgScore;
+	}
+	public void setDatingAvgScore(double datingAvgScore) {
+		this.datingAvgScore = datingAvgScore;
+	}
+	public double getFamilyAvgScore() {
+		return familyAvgScore;
+	}
+	public void setFamilyAvgScore(double familyAvgScore) {
+		this.familyAvgScore = familyAvgScore;
+	}
 	
 	
 	
