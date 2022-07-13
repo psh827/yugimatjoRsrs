@@ -8,8 +8,8 @@
 </head>
 <body>
 	<form action="login" method="post">
-		���대�� : <input type="text" name="userId"/><br>
-		鍮�諛�踰��� : <input type="password" name="passwd"/><br>
+		아이디 : <input type="text" name="userId"/><br>
+		비번 : <input type="password" name="passwd"/><br>
 		<input type="submit" value="濡�洹몄��"/>
 	</form>
 </body>

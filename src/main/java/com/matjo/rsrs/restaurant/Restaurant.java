@@ -1,5 +1,7 @@
 package com.matjo.rsrs.restaurant;
 
+import com.matjo.rsrs.ambiance.Ambiance;
+
 public class Restaurant {
 	private long rid;
 	private String resName;
@@ -18,7 +20,7 @@ public class Restaurant {
 	private double ambianceDateScore;
 	private double ambianceCostScore;
 	private double ambianceGroupScore;
-	
+	private Ambiance ambiance;
 	
 	public long getRid() {
 		return rid;
@@ -122,7 +124,13 @@ public class Restaurant {
 	public void setAmbianceGroupScore(double ambianceGroupScore) {
 		this.ambianceGroupScore = ambianceGroupScore;
 	}
-
+	public Ambiance getAmbiance() {
+		return ambiance;
+	}
+	public void setAmbiance(Ambiance ambiance) {
+		this.ambiance = ambiance;
+	}
+	
 	
 	 
 }
