@@ -10,6 +10,7 @@ import java.util.List;
 import com.matjo.rsrs.ambiance.Ambiance;
 import com.matjo.rsrs.data.DataSource;
 import com.matjo.rsrs.data.NamingService;
+import com.matjo.rsrs.location.Location;
 
 public class RestaurantDao {
 	private DataSource dataSource;
@@ -18,10 +19,12 @@ public class RestaurantDao {
 		NamingService namingService = NamingService.getInstance();
 		dataSource = (DataSource)namingService.getAttribute("dataSource");
 	}
-	public void addRes(Restaurant res) {
+	public void addRes(Restaurant res, Location location) {
 		String sql = "INSERT INTO Restaurant(resName, resScore, "
 				+ " foodType, foodPrice, resCapacity) "
 				+ " VALUES (?, ?, ?, ?, ?)";
+		String sql2 = "INSERT INTO Location(regionName, resId) VALUES (?, ?)";
+		String sql3 = "INSERT INTO Ambiance(resId) VALUES(?)";
 		
 		try {
 			Connection con = null;
@@ -35,7 +38,17 @@ public class RestaurantDao {
 				pstmt.setInt(4, res.getFoodPrice());
 				pstmt.setInt(5, res.getResCapacity());
 				pstmt.execute();
-				System.out.println("INSERTED...");
+				System.out.println("RESTAURNAT INSERTED...");
+				Restaurant res2 = getResId(res.getResName());
+				pstmt = con.prepareStatement(sql2);
+				pstmt.setString(1, location.getRegionName());
+				pstmt.setLong(2, res2.getRid());
+				pstmt.execute();
+				System.out.println("LOCATION INSERTED...");
+				pstmt = con.prepareStatement(sql3);
+				pstmt.setLong(1, res2.getRid());
+				pstmt.execute();
+				System.out.println("AMBIANCE INSERTED...");
 			} finally {
 				dataSource.close(pstmt, con);
 			}
@@ -44,9 +57,43 @@ public class RestaurantDao {
 		}
 	}
 	
-	public List<Restaurant> findResByCondition(String resLocation, String foodType, int foodPrice, int resCapacity, String ambiance) {
-		String sql = "Select r.*, ab.* FROM Restaurant r INNER JOIN Ambiance ab ON r.rId = ab.aId INNER JOIN Location lo ON r.rId = lo.resId WHERE lo.resLocation=? AND r.foodType=? "
-				+ "AND r.foodPrice=? AND r.resCapacity=?";
+	public Restaurant getResId(String resName) {
+		String sql = "SELECT rId FROM Restaurant WHERE resName=?";
+		long rid = 0;
+		try {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = dataSource.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, resName);
+				rs = pstmt.executeQuery();
+				Restaurant res = null;
+				while(rs.next()) {
+					res = new Restaurant();
+					res.setRid(rs.getLong("rId"));
+					return res;
+				}
+				
+			} finally {
+				dataSource.close(rs, pstmt, con);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
+		return null;
+	}
+	
+	public List<Restaurant> findResByCondition(String resLocation, String foodType, 
+							int foodPrice, int resCapacity) {
+		String sql = "Select r.*, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', "
+				+ "ab.cost / ab.costScore as '가성비', ab.dating / ab.datingScore as '데이트하기좋은', ab.family / ab.familyScore as '가족' FROM Restaurant r "
+				+ "INNER JOIN Ambiance ab ON r.rId = ab.resId INNER JOIN Location "
+				+ "lo ON r.rId = lo.resId WHERE lo.regionName=? AND r.foodType=? "
+				+ "AND r.foodPrice BETWEEN 10000 AND ? AND r.resCapacity BETWEEN 1 AND ?";
 		List<Restaurant> list = new ArrayList<>();
 		try {
 			Connection con = null;
@@ -62,12 +109,14 @@ public class RestaurantDao {
 				rs = pstmt.executeQuery();
 				Restaurant res = null;
 				while(rs.next()) {
+					res = new Restaurant();
 					res.setResName(rs.getString("resName"));
 					res.setResScore(rs.getDouble("resScore"));
 					res.setFoodType(rs.getString("foodType"));
 					res.setFoodPrice(rs.getInt("foodPrice"));
 					res.setResCapacity(rs.getInt("resCapacity"));
-					res.setAmbiance(new Ambiance());
+					res.setAmbiance(new Ambiance(rs.getDouble("편안함"), rs.getDouble("럭셔리한"),
+							rs.getDouble("가성비"), rs.getDouble("데이트하기좋은"), rs.getDouble("가족")));
 					list.add(res);
 				}
 				

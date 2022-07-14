@@ -87,4 +87,4 @@ CREATE TABLE Ambiance (
 
 DROP TABLE Restaurant;
 
-
+DELETE FROM Restaurant WHERE rId=2006;

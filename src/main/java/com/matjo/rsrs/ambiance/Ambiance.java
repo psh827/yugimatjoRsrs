@@ -12,13 +12,20 @@ public class Ambiance {
 	private int datingScore;
 	private int familyScore;
 	
-	private double comfortAvgScroe;
+	private double comfortAvgScore;
 	private double luxuryAvgScore;
 	private double costAvgScore;
 	private double datingAvgScore;
 	private double familyAvgScore;
 	
-	private Ambiance ambiance;
+	public Ambiance(double comfortAvgScore, double luxuryAvgScore, double costAvgScore, double datingAvgScore, double familyAvgScore) {
+		this.comfortAvgScore = comfortAvgScore;
+		this.luxuryAvgScore = luxuryAvgScore;
+		this.costAvgScore = costAvgScore;
+		this.datingAvgScore = datingAvgScore;
+		this.familyAvgScore = familyAvgScore;
+	}
+	
 	
 	public int getComfort() {
 		return comfort;
@@ -79,42 +86,6 @@ public class Ambiance {
 	}
 	public void setFamilyScore(int familyScore) {
 		this.familyScore = familyScore;
-	}
-	public Ambiance getAmbiance() {
-		return ambiance;
-	}
-	public void setAmbiance(Ambiance ambiance) {
-		this.ambiance = ambiance;
-	}
-	public double getComfortAvgScroe() {
-		return comfortAvgScroe;
-	}
-	public void setComfortAvgScroe(double comfortAvgScroe) {
-		this.comfortAvgScroe = comfortAvgScroe;
-	}
-	public double getLuxuryAvgScore() {
-		return luxuryAvgScore;
-	}
-	public void setLuxuryAvgScore(double luxuryAvgScore) {
-		this.luxuryAvgScore = luxuryAvgScore;
-	}
-	public double getCostAvgScore() {
-		return costAvgScore;
-	}
-	public void setCostAvgScore(double costAvgScore) {
-		this.costAvgScore = costAvgScore;
-	}
-	public double getDatingAvgScore() {
-		return datingAvgScore;
-	}
-	public void setDatingAvgScore(double datingAvgScore) {
-		this.datingAvgScore = datingAvgScore;
-	}
-	public double getFamilyAvgScore() {
-		return familyAvgScore;
-	}
-	public void setFamilyAvgScore(double familyAvgScore) {
-		this.familyAvgScore = familyAvgScore;
 	}
 	
 	
