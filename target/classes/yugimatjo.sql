@@ -88,3 +88,8 @@ CREATE TABLE Ambiance (
 DROP TABLE Restaurant;
 
 DELETE FROM Restaurant WHERE rId=2006;
+SELECT r.*, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', 
+ab.cost / ab.costScore as '가성비', ab.dating / ab.datingScore as '데이트하기좋은', ab.family / ab.familyScore as '가족' FROM Restaurant r 
+INNER JOIN Ambiance ab ON r.rId = ab.resId INNER JOIN Location 
+lo ON r.rId = lo.resId WHERE lo.regionName='대구 중구' AND r.foodType='일식' 
+AND r.foodPrice <= 60000 AND r.resCapacity <= 2;

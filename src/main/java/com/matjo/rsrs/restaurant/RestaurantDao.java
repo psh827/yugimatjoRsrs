@@ -77,7 +77,7 @@ public class RestaurantDao {
 				}
 				
 			} finally {
-				dataSource.close(rs, pstmt, con);
+				dataSource.close(rs, pstmt, con);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 			}
 			
 		} catch (SQLException e) {
@@ -93,7 +93,7 @@ public class RestaurantDao {
 				+ "ab.cost / ab.costScore as '가성비', ab.dating / ab.datingScore as '데이트하기좋은', ab.family / ab.familyScore as '가족' FROM Restaurant r "
 				+ "INNER JOIN Ambiance ab ON r.rId = ab.resId INNER JOIN Location "
 				+ "lo ON r.rId = lo.resId WHERE lo.regionName=? AND r.foodType=? "
-				+ "AND r.foodPrice BETWEEN 10000 AND ? AND r.resCapacity BETWEEN 1 AND ?";
+				+ "AND r.foodPrice BETWEEN 0 AND ? AND r.resCapacity BETWEEN 1 AND ?";
 		List<Restaurant> list = new ArrayList<>();
 		try {
 			Connection con = null;
@@ -115,11 +115,10 @@ public class RestaurantDao {
 					res.setFoodType(rs.getString("foodType"));
 					res.setFoodPrice(rs.getInt("foodPrice"));
 					res.setResCapacity(rs.getInt("resCapacity"));
-					res.setAmbiance(new Ambiance(rs.getDouble("편안함"), rs.getDouble("럭셔리한"),
+					res.setAmbiance(new Ambiance(rs.getDouble("편안한"), rs.getDouble("럭셔리한"),
 							rs.getDouble("가성비"), rs.getDouble("데이트하기좋은"), rs.getDouble("가족")));
 					list.add(res);
 				}
-				
 			} finally {
 				dataSource.close(rs, pstmt, con);
 			}

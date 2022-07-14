@@ -38,22 +38,22 @@ public class AddUserServlet extends HttpServlet {
 		
 		List<String>errorMsgs = new ArrayList<>();
 		if (userName == null || userName.length() == 0) {
-			errorMsgs.add("이름은 필수입력 정보인다.");
+			errorMsgs.add("이름은 필수입력 정보이다.");
 		}
 		if (userId == null || userId.length() == 0) {
-			errorMsgs.add("아이디는 필수입력 정보인다.");
+			errorMsgs.add("아이디는 필수입력 정보이다.");
 		}
 		if (passwd == null || passwd.length() == 0) {
-			errorMsgs.add("비밀번호는 필수입력 정보인다.");
+			errorMsgs.add("비밀번호는 필수입력 정보이다.");
 		}
 		if (nickname == null || nickname.length() == 0) {
-			errorMsgs.add("닉네임은 필수입력 정보인다.");
+			errorMsgs.add("닉네임은 필수입력 정보이다.");
 		}
 		
 		RequestDispatcher dispatcher = null;
 		if (errorMsgs.size() > 0) {
 			request.setAttribute("오류", errorMsgs);
-			dispatcher = request.getRequestDispatcher("/join/error.jsp");
+			dispatcher = request.getRequestDispatcher("/error/add_user_error.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
@@ -67,7 +67,7 @@ public class AddUserServlet extends HttpServlet {
 		request.setAttribute("user", user);
 		
 		request.setAttribute("userName", userName);
-		dispatcher = request.getRequestDispatcher("/join/sucess.jsp");
+		dispatcher = request.getRequestDispatcher("/success/add_user_success.jsp");
 		dispatcher.forward(request, response);
 	}
 

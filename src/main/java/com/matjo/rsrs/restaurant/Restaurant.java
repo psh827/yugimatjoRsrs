@@ -63,6 +63,10 @@ public class Restaurant {
 		this.ambiance = ambiance;
 	}
 	
+//	@Override
+//	public String toString() {
+//		return getResName() + "\t평점: " + getResScore() + "\t음식: " + getFoodType() + "\t예상가격: " + getFoodPrice() + "\t기준인원: " + getResCapacity();
+//	}
 	
 	 
 }

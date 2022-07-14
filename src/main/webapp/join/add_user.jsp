@@ -1,74 +1,104 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<title>È¸¿ø°¡ÀÔ</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+  	.mb-31 {
+	  text-align: center;
+	  padding: 25px;
+	  font-weight: bold;
+  	}
+    body {
+      min-height: 100vh;
+      background-color: linear-gradient(to left rgba(255,113,31,.8));
+    }
 
-=======
->>>>>>> hoon
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ï¿½ï¿½ï¿½ï¿½åª›ï¿½ï¿½ï¿½</title>
+    .input-form {
+      max-width: 680px;
+      margin-top: 280px;
+      padding: 32px;
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+    .btn {
+  	 background: linear-gradient(90deg, rgba(255,113,31,1) 0%, rgba(255,202,155,1) 100%);
+     color: white;
+     width: 300px;
+     position: relative;
+     left: 25%;
+     }
+  </style>
 </head>
 <body>
-	<form action="add_user.do" method="post">
-		<div id="header">
-     		<h1>ï¿½ï¿½ï¿½ï¿½åª›ï¿½ï¿½ï¿½</h1>
-   		</div>
-    <table class="table_a">
-        <tr>
-          <td>
-            <h3>
-              <label for="userName" name="userName">ï¿½ëŒ€ï¿½</label>
-            </h3>
-            <input type="text" class="big" name="userName">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h3>
-              <label for="userId" name="userId">ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½</label>
-            </h3>
-            <input type="text" class="big" name="userId">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h3>
-              <label for="passwd" name="passwd">é®ï¿½è«›ï¿½è¸°ï¿½ï¿½ï¿½</label>
-            </h3>
-            <input type="password" class="big" name="passwd">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h3>
-              <label for="nickname" name="nickname">ï¿½ï¿½ï¿½ã…¼ï¿½ï¿½</label>
-            </h3>
-            <input type="text" class="big" name="nickname">
-          </td>
-        </tr>
-        <tr>
-        	<td>
-        		<input type="submit" value="ï¿½ï¿½ï¿½ï¿½"/>
-        	</td>
-        </tr>
-      </table>
-	</form>
-<<<<<<< HEAD
-=======
->>>>>>> 260abbadc2c91550118b602fcb6bc5ef6dae4844
->>>>>>> hoon
+  <div class="container">
+    <div class="input-form-backgroud row">
+      <div class="input-form col-md-12 mx-auto">
+        <h4 class="mb-31">È¸¿ø°¡ÀÔ</h4>
+        <form class="validation-form" action="add_user.do" method="post">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">ÀÌ¸§</label>
+              <input type="text" class="form-control" id="name" placeholder="ÀÌ¸§" name="userName" required>
+              <div class="invalid-feedback">
+                ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä.
+              </div>
+            </div>
+             <div class="col-md-6 mb-3">
+              <label for="id">¾ÆÀÌµğ</label>
+              <input type="text" class="form-control" id="id" placeholder="id" name="userId" required>
+              <div class="invalid-feedback">
+                ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.
+              </div>
+            </div>
+             <div class="col-md-6 mb-3">
+              <label for="passwd">ºñ¹Ğ¹øÈ£</label>
+              <input type="password" class="form-control" id="passwd" placeholder="ºñ¹Ğ¹øÈ£" name="passwd" required>
+              <div class="invalid-feedback">
+                ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="nickname">´Ğ³×ÀÓ</label>
+              <input type="text" class="form-control" id="nickname" placeholder="´Ğ³×ÀÓ" name="nickname" required>
+              <div class="invalid-feedback">
+                ´Ğ³×ÀÓÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.
+              </div>
+            </div>
+          </div>
+            <button class="btn" type="submit">°¡ÀÔ ¿Ï·á</button>
+        </form>
+      </div>
+    </div>
+    <footer class="my-3 text-center text-small">
+      <p class="mb-1">&copy; 2022 YM</p>
+    </footer>
+  </div>
+  <script>
+    window.addEventListener('load', () => {
+      const forms = document.getElementsByClassName('validation-form');
+
+      Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  </script>
 </body>
 </html>

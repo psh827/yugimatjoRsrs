@@ -14,4 +14,7 @@ public class UserService {
 		return userDao.isValidUser(userId, passwd);
 	}
 	
+	public boolean isUserPosition(String userId, String passwd) {
+		return userDao.isUserPosition(userId, passwd);
+	}
 }

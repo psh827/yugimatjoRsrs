@@ -36,9 +36,16 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 		
+		if(userService.isValidUser(userId,passwd)) {
+			if(!userService.isUserPosition(userId, passwd)) {
+				response.sendRedirect("add_res.jsp");
+			}
+		}
+		
+		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("userId", userId);
-		response.sendRedirect("main");
+		response.sendRedirect("/rsrs/main/main.jsp");
 	}
 
 }

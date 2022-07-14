@@ -30,7 +30,7 @@ public class AddResServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 						throws ServletException, IOException {
-		request.setCharacterEncoding("EUC-Kr");
+		request.setCharacterEncoding("UTF-8");
 		String resName = request.getParameter("resName");
 		String resLocation= request.getParameter("resLocation");
 		String resScore = request.getParameter("resScore");
