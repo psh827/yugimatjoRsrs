@@ -30,7 +30,7 @@
 			</tr>
 			<c:forEach var="restaurant" items="${rList}">
 				<tr class="resList">
-						<td><a href="ge">${restaurant.resName}</a></td><td>${restaurant.resScore}</td>
+						<td><a href="/rsrs/restaurant/subpage?resName=${restaurant.resName}">${restaurant.resName}</a></td><td>${restaurant.resScore}</td>
 						<td>${restaurant.foodType}</td><td>${restaurant.foodPrice}</td>
 						<td>${restaurant.resCapacity}</td>
 				</tr>

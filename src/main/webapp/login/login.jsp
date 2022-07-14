@@ -22,7 +22,7 @@
          <input type="text" class="form-control" id="floatingInput" placeholder="Id" name="userId">
        <div class="form-floating">
          <label for="floatingPassword">비밀번호</label>
-         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwd ">
+         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwd">
        </div>
        </div>
 	   

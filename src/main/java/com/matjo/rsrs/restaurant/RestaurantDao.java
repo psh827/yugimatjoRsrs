@@ -110,6 +110,7 @@ public class RestaurantDao {
 				Restaurant res = null;
 				while(rs.next()) {
 					res = new Restaurant();
+					res.setRid(rs.getLong("rId"));
 					res.setResName(rs.getString("resName"));
 					res.setResScore(rs.getDouble("resScore"));
 					res.setFoodType(rs.getString("foodType"));
@@ -126,9 +127,43 @@ public class RestaurantDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		return list;
 	}
+	
+	public Restaurant findResToSubpage(String resName) {
+			String sql = "SELECT * FROM Restaurant WHERE resName=?";
+			try {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, resName);
+			rs = pstmt.executeQuery();
+			Restaurant res = null;
+			while(rs.next()) {
+				res = new Restaurant();
+				System.out.println("start");
+				res.setRid(rs.getLong("rId"));
+				res.setResName(rs.getString("resName"));
+				res.setResScore(rs.getDouble("resScore"));
+				res.setFoodType(rs.getString("foodType"));
+				res.setFoodPrice(rs.getInt("foodPrice"));
+				res.setResCapacity(rs.getInt("resCapacity"));
+				res.setAmbiance(new Ambiance(rs.getDouble("편안한"), rs.getDouble("럭셔리한"),
+						rs.getDouble("가성비"), rs.getDouble("데이트하기좋은"), rs.getDouble("가족")));
+				return res;
+			}
+			} finally {
+			dataSource.close(rs, pstmt, con);
+			}
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+			}
+			return null;
+	}
+	
+	
 }

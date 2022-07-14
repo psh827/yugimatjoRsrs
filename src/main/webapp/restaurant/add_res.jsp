@@ -12,7 +12,7 @@
 <body>
 
 <header id="header">
-	<jsp:include page="/incl/header.jsp"/>
+	<jsp:include page="/incl/admin_header.jsp"/>
 </header>
 
 <form action="add_res.do" method="post">

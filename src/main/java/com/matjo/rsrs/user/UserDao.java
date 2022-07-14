@@ -75,9 +75,8 @@ public class UserDao {
 	      return null;
 	   }
 	
-	
-	public boolean isValidUser(String userId, String passwd) {
-	      String sql = "SELECT * FROM User WHERE userId = ? and passwd = ?";
+	public boolean isUserPosition(String userId, String passwd) {
+	      String sql = "SELECT position FROM User WHERE userId = ? and passwd = ?";
 	      boolean result = true;
 	      try {
 	         Connection con = null;
@@ -90,7 +89,7 @@ public class UserDao {
 	            pstmt.setString(2, passwd);
 	            rs = pstmt.executeQuery();
 	            User user = null;
-	            if(!rs.next()) {
+	            if(rs.next()) {
 	            	user = new User();
 	            	user.setPosition(rs.getString("position").charAt(0));
 	            	if(user.getPosition() == 'M') {
@@ -106,9 +105,9 @@ public class UserDao {
 	      }      
 	      return result;
 	   }
-
-	public boolean isUserPosition(String userId, String passwd) {
-		  String sql = "SELECT position FROM User WHERE userId = ? and passwd = ?";
+	
+	public boolean isValidUser(String userId, String passwd) {
+		  String sql = "SELECT * FROM User WHERE userId = ? and passwd = ?";
 	      boolean result = true;
 	      try {
 	         Connection con = null;
@@ -119,10 +118,13 @@ public class UserDao {
 	            pstmt = con.prepareStatement(sql);
 	            pstmt.setString(1, userId);
 	            pstmt.setString(2, passwd);
+	            System.out.println(userId);
+	            System.out.println(passwd);
 	            rs = pstmt.executeQuery();
 	            System.out.println(rs);
 	            if(!rs.next()) {
-	            	
+	            	result = false;
+	            	return result;
 	            }
 	         } finally {
 	            dataSource.close(rs, pstmt, con);

@@ -17,4 +17,8 @@ public class UserService {
 	public boolean isUserPosition(String userId, String passwd) {
 		return userDao.isUserPosition(userId, passwd);
 	}
+	
+	public char isUserPositionToChar(String userId, String passwd) {
+		return userDao.isUserPositionToChar(userId, userId);
+	}
 }

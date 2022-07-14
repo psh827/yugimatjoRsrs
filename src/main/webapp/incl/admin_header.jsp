@@ -4,7 +4,7 @@
       <nav class="navbar navbar-light bg-primary">
 
         <div class="col-sm">
-          	<a class="navbar-brand" href="/rsrs/main/main.jsp"><img src="./img/logo/yugi.png" alt="logo">YUGIMATJO</a>         
+         	<a class="navbar-brand" href="/rsrs/restaurant/add_res.jsp"><img src="./img/logo/yugi.png" alt="logo">YUGIMATJO</a>
         </div>
         <div class="col col-md-4">
         </div>

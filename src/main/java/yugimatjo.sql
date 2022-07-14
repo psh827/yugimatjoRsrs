@@ -11,6 +11,9 @@ CREATE TABLE User (
 INSERT INTO User (userName, userId, passwd, nickName)
 VALUES ('박희정','park77','cc111','heejung');
 
+INSERT INTO User (userName, userId, passwd, nickName, position)
+VALUES ('관리자','manager','qwer123','manager', '');
+
 CREATE TABLE Restaurant (
    rId                 BIGINT         PRIMARY KEY AUTO_INCREMENT,
    resName             VARCHAR(50)    NOT NULL,
