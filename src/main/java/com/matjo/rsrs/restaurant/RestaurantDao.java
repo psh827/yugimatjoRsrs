@@ -146,7 +146,6 @@ public class RestaurantDao {
 			Restaurant res = null;
 			while(rs.next()) {
 				res = new Restaurant();
-				System.out.println("start");
 				res.setRid(rs.getLong("rId"));
 				res.setResName(rs.getString("resName"));
 				res.setResScore(rs.getDouble("resScore"));

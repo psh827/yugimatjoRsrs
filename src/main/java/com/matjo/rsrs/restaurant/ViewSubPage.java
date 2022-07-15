@@ -24,7 +24,6 @@ public class ViewSubPage extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("제목 클릭 후 호출");
 		String resName = request.getParameter("resName");
 		
 		Restaurant s = null;

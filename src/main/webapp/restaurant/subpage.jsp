@@ -116,64 +116,7 @@ ul,li { list-style: none;}
       </div>
   </div>
   
-
-
-    <script src="index.js"></script>
-    <script>
-     const btnLike = document.querySelector(".btn-like");
-     document.querySelector(".btn-like").addEventListener("click", function(){
-        const resultElement = document.getElementById('result');
-        console.log(btnLike)
-          // 현재 화면에 표시된 값
-          let number = resultElement.innerText;
-       
-          // 더하기/빼기
-          if(!btnLike.classList.contains("done")) {
-            btnLike.classList.add("done")
-            number = parseInt(number) + 1;
-          }else if(btnLike.classList.contains("done"))  {
-             btnLike.classList.remove("done")
-            number = parseInt(number) - 1;
-          }
-          if(number >= 2) {
-             number = 1;
-          }else if(number <= -1)  {
-             number = 0;
-          }
-          // 결과 출력
-          resultElement.innerText = number;
-      })
-    </script>
-    <script src="//code.jquery.com/jquery.min.js"></script>
-<script>
-$(".btn-like").click(function() {
-   $(this).toggleClass("done");
-})
-     const btnLike = document.querySelector(".btn-like");
-     document.querySelector(".btn-like").addEventListener("click", function(){
-        const resultElement = document.getElementById('result');
-        console.log(btnLike)
-          // 현재 화면에 표시된 값
-          let number = resultElement.innerText;
-       
-          // 더하기/빼기
-          if(!btnLike.classList.contains("done")) {
-            btnLike.classList.add("done")
-            number = parseInt(number) + 1;
-          }else if(btnLike.classList.contains("done"))  {
-             btnLike.classList.remove("done")
-            number = parseInt(number) - 1;
-          }
-          if(number >= 2) {
-             number = 1;
-          }else if(number <= -1)  {
-             number = 0;
-          }
-          // 결과 출력
-          resultElement.innerText = number;
-      })
-
-</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
       defer
