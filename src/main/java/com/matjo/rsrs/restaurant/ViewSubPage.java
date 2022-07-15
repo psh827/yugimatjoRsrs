@@ -27,10 +27,10 @@ public class ViewSubPage extends HttpServlet {
 		System.out.println("제목 클릭 후 호출");
 		String resName = request.getParameter("resName");
 		
-		Restaurant s = new Restaurant();
-		s.setResName(resName);
-		restaurantService.findResToSubpage(resName);
+		Restaurant s = null;
+		s = restaurantService.findResToSubpage(resName);
 		request.setAttribute("restaurant", s);
+		request.setAttribute("resName", resName);
 		RequestDispatcher rd = request.getRequestDispatcher("/restaurant/subpage.jsp");
 		rd.forward(request, response);
 	}	

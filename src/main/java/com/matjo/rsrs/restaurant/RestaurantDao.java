@@ -87,6 +87,8 @@ public class RestaurantDao {
 		return null;
 	}
 	
+	
+	
 	public List<Restaurant> findResByCondition(String resLocation, String foodType, 
 							int foodPrice, int resCapacity) {
 		String sql = "Select r.*, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', "
@@ -151,8 +153,6 @@ public class RestaurantDao {
 				res.setFoodType(rs.getString("foodType"));
 				res.setFoodPrice(rs.getInt("foodPrice"));
 				res.setResCapacity(rs.getInt("resCapacity"));
-				res.setAmbiance(new Ambiance(rs.getDouble("편안한"), rs.getDouble("럭셔리한"),
-						rs.getDouble("가성비"), rs.getDouble("데이트하기좋은"), rs.getDouble("가족")));
 				return res;
 			}
 			} finally {

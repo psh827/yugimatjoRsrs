@@ -18,4 +18,7 @@ public class UserService {
 		return userDao.isUserPosition(userId, passwd);
 	}
 	
+	public User getUserId(String userId) {
+		return userDao.getUserId(userId);
+	}
 }

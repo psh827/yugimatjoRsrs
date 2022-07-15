@@ -16,7 +16,15 @@ public class ReviewDao {
 	
 	public void addReview(Review review) {
 		String sql = "INSERT INTO Review(userId, resId, reviewText, recommandScore)" + "VALUES(?,?,?,?)";
-		String sql2 = "UPDATE Account SET point=point + 10 WHERE=?";
+		String sql2 = "UPDATE Account SET point=point + 10 WHERE userId=?";
+		String sql3 = "UPDATE User A INNER JOIN Account B ON "
+				+ "A.uid=B.userId "
+				+ "SET A.grade = "
+				+ "CASE WHEN B.point >= 300 THEN '계란' "
+				+ "WHEN B.point >=700 THEN '타조알' "
+				+ "WHEN B.point >=1200 THEN '독수리알'"
+				+ " ELSE '메추리알'"
+				+ "END";
 		try {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -28,9 +36,14 @@ public class ReviewDao {
 				pstmt.setString(3, review.getReviewText());
 				pstmt.setDouble(4, review.getRecommandScore());
 				pstmt.executeUpdate();
+				System.out.println("리뷰완료");
 				pstmt = con.prepareStatement(sql2);
 				pstmt.setLong(1, review.getUserId());
 				pstmt.executeUpdate();
+				System.out.println("포인트업");
+				pstmt = con.prepareStatement(sql3);
+				pstmt.executeUpdate();
+				System.out.println("등급확인.");
 			} finally  {
 				dataSource.close(pstmt,con);	
 			}	

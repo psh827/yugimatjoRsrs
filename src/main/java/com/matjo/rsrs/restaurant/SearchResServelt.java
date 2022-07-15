@@ -54,10 +54,12 @@ public class SearchResServelt extends HttpServlet {
 		String realResult = "";
 		if(result.length <= 2) {
 			realResult = result[0].split("원")[0];
+			return realResult.replace(",", "");
 		}
 		realResult = result[2].split("원")[0];	
 		
 		realResult = realResult.replace(",", "");
+		System.out.println(realResult);
 		
 		return realResult;
 	}

@@ -12,7 +12,7 @@ INSERT INTO User (userName, userId, passwd, nickName)
 VALUES ('박희정','park77','cc111','heejung');
 
 INSERT INTO User (userName, userId, passwd, nickName, position)
-VALUES ('관리자','manager','qwer123','manager', '');
+VALUES ('관리자','manager','qwer123','manager', 'M');
 
 CREATE TABLE Restaurant (
    rId                 BIGINT         PRIMARY KEY AUTO_INCREMENT,
@@ -35,6 +35,17 @@ SELECT * FROM Location;
 
 SELECT * FROM Ambiance;
 
+UPDATE Account SET point=point+15 WHERE userId=1020;
+
+UPDATE User A INNER JOIN Account B ON
+A.uid=B.userId
+SET A.grade = 
+CASE 
+WHEN B.point >= 300 THEN '계란'
+WHEN B.point >=700 THEN '타조알'
+WHEN B.point >=1200 THEN '독수리알'
+END;
+
 
 CREATE TABLE Account (
 	pId				BIGINT			PRIMARY KEY AUTO_INCREMENT,
@@ -44,6 +55,7 @@ CREATE TABLE Account (
 	CONSTRAINT Account_userId_FK FOREIGN KEY (userId) REFERENCES User(uId)
 ) AUTO_INCREMENT = 3001;
 
+DELETE FROM User WHERE uId=1019;
 
 CREATE TABLE Review (
 	reviewId		BIGINT			PRIMARY KEY AUTO_INCREMENT,

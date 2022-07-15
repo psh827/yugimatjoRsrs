@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <link rel="stylesheet" href="../css/result_res.css">
 <link rel="stylesheet" href="../css/customize.css">
+<script type="module" src="./js/index.js"></script>
 <style>
 *{magin:0;padding:0;}
 ul,li { list-style: none;}
@@ -20,8 +21,14 @@ ul,li { list-style: none;}
 .sub-name-input {margin-top:12px;}
 .sub-input-text{margin:5px;height: 20px;}
 .resname-first{font-size:30px; font-weight:bold;}
+
+.comment{width:100%; height:100px; margin-bottom:5px; background:#fff1db;}
+.comment-Id{padding-top: 20px; margin-bottom: -5px; display: inline-block;margin-right: 20px;}
+.comment-list-title{width:100%;}
 .btn-like {
   color: transparent;
+  border:none;
+  background:none;
   text-shadow: 0 0 2px rgba(255,255,255,.7), 0 0 0 #000;
 }
 .btn-like:hover {
@@ -35,148 +42,143 @@ ul,li { list-style: none;}
   color: red;
   text-shadow: 0 0 0 #777;
 }
+#map {
+  height: 500px;
+}
 </style>
+
 </head>
 <body>
 <header id="header">
-		<jsp:include page="/incl/header.jsp"/>
-	</header>
+      <jsp:include page="/incl/header.jsp"/>
+   </header>
 <div class="album py-5 bg-light">
     <div class="container">
 
       <div class="row">
-        <div class="col-md-4">
+        <div class="col">
           <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="1000px" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div id="map"></div>
             <div class="card-body">
-            	<div class="sub-name-title">
-	            	<ul>
-		            	<li class="resname-first">
-		            		${restaurant.resName}
-		            	</li>
-		            	<li>
-		            		${restaurant.location.regionName}
-		            	</li>
-		            	<li>
-		            		${restaurant.resScore}
-		            	</li>
-		            	<li>
-		            		${restaurant.foodType}
-		            	</li>
-		            	<li>
-		            		${restaurant.foodPrice}
-		            	</li>
-		            	<li>
-		            		${restaurant.resCapacity}
-		            	</li>
-	            	</ul>
-            	</div>
+               <div class="sub-name-title">
+                  <ul>
+                     <li class="resname-first">
+                        ${restaurant.resName}
+                     </li>
+                     <li>
+                        ${restaurant.location.regionName}
+                     </li>
+                     <li>
+                        ${restaurant.resScore}
+                     </li>
+                     <li>
+                        ${restaurant.foodType}
+                     </li>
+                     <li>
+                        ${restaurant.foodPrice}
+                     </li>
+                     <li>
+                        ${restaurant.resCapacity}
+                     </li>
+                  </ul>
+               </div>
             </div>
           </div>
         </div>
       </div>
 
-  
-  <form action="review" method="post">
-<div id="form-commentInfo">
-        <div id="comment-count">댓글 <span id="count">0</span></div>
-        <input type="text" id="comment-input" placeholder="아이디" name="userId"><br>
-        <input type="text" id="comment-input" placeholder="댓글을 입력해 주세요." name="reviewText">
-        <input type="text" id="comment-input" placeholder="식당점수" name="recommandScore">
-        <input type="submit" value="등록">
-    </div>
-    <div id=comments>
 
+<a class="btn btn-primary" href="#" role="button">Link</a>
+<button class="btn btn-primary" type="submit">Button</button>
+<input class="btn btn-primary" type="button" value="Input">
+<input class="btn btn-primary" type="submit" value="Submit">
+<input class="btn btn-primary" type="reset" value="Reset">
+  
+
+  <form action="review" method="post">
+   <div id="form-commentInfo">
+        <div id="comment-count">댓글 <span id="count">0</span></div>
+        <div class="comment-first"><p id="com_writer" class="comment-Id" name="userId">${userId}</p><input type='button' class="btn-like" value='❤'/> <span id='result'>0</span></div>
+        <br>
+        <input class="comment" type="text" id="comment-input reviewText" placeholder="댓글을 입력해 주세요." name="reviewText">
+        <input type="submit" value="등록" id="Comment_regist">
     </div>
 </form>
-<input type='button'
-       class="btn-like"
-       value='❤'/>
-<div id='result'>0</div>
 
-    <script src="index.js"></script>
-    <script>
-  	const btnLike = document.querySelector(".btn-like");
-  	document.querySelector(".btn-like").addEventListener("click", function(){
-  		const resultElement = document.getElementById('result');
-  		console.log(btnLike)
-  	  	// 현재 화면에 표시된 값
-  	  	let number = resultElement.innerText;
-  	  
-  	  	// 더하기/빼기
-  	 	 if(!btnLike.classList.contains("done")) {
-  	 		btnLike.classList.add("done")
-  	    	number = parseInt(number) + 1;
-  	  	}else if(btnLike.classList.contains("done"))  {
-  	  		btnLike.classList.remove("done")
-	  	    number = parseInt(number) - 1;
-  		  }
-  	  	if(number >= 2) {
-  		  	number = 1;
-  	  	}else if(number <= -1)  {
-  		  	number = 0;
-  	  	}
-  	  	// 결과 출력
-  	  	resultElement.innerText = number;
-  	 })
-    </script>
-    <script src="//code.jquery.com/jquery.min.js"></script>
-<script>
-$(".btn-like").click(function() {
-	$(this).toggleClass("done");
-})
-  	const btnLike = document.querySelector(".btn-like");
-  	document.querySelector(".btn-like").addEventListener("click", function(){
-  		const resultElement = document.getElementById('result');
-  		console.log(btnLike)
-  	  	// 현재 화면에 표시된 값
-  	  	let number = resultElement.innerText;
-  	  
-  	  	// 더하기/빼기
-  	 	 if(!btnLike.classList.contains("done")) {
-  	 		btnLike.classList.add("done")
-  	    	number = parseInt(number) + 1;
-  	  	}else if(btnLike.classList.contains("done"))  {
-  	  		btnLike.classList.remove("done")
-	  	    number = parseInt(number) - 1;
-  		  }
-  	  	if(number >= 2) {
-  		  	number = 1;
-  	  	}else if(number <= -1)  {
-  		  	number = 0;
-  	  	}
-  	  	// 결과 출력
-  	  	resultElement.innerText = number;
-  	 })
+<div class="container-list">
+      <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+            <tr>
+               <td class="comment-list-title" align="left" bgcolor="beige">댓글</td>
+            </tr>
+      </table>
 
-</script>
-
-<div class="container">
-	<div class="row">
-		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-				<tr>
-					<td align="left" bgcolor="beige">댓글</td>
-				</tr>
-				<tr>
-					<div class="container">
-						<div class="row">
-							<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-								<c:forEach var="test" items="${reviewList}">
-								<tr>	
-									<td colspan="5" align="left">
-									${test}
-									</td>	
-								</tr>
-								</c:forEach>
-							</table>			
-						</div>
-					</div>
-				</tr>
-		</table>
-	</div>
 </div>
       </div>
   </div>
   
+
+
+    <script src="index.js"></script>
+    <script>
+     const btnLike = document.querySelector(".btn-like");
+     document.querySelector(".btn-like").addEventListener("click", function(){
+        const resultElement = document.getElementById('result');
+        console.log(btnLike)
+          // 현재 화면에 표시된 값
+          let number = resultElement.innerText;
+       
+          // 더하기/빼기
+          if(!btnLike.classList.contains("done")) {
+            btnLike.classList.add("done")
+            number = parseInt(number) + 1;
+          }else if(btnLike.classList.contains("done"))  {
+             btnLike.classList.remove("done")
+            number = parseInt(number) - 1;
+          }
+          if(number >= 2) {
+             number = 1;
+          }else if(number <= -1)  {
+             number = 0;
+          }
+          // 결과 출력
+          resultElement.innerText = number;
+      })
+    </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+<script>
+$(".btn-like").click(function() {
+   $(this).toggleClass("done");
+})
+     const btnLike = document.querySelector(".btn-like");
+     document.querySelector(".btn-like").addEventListener("click", function(){
+        const resultElement = document.getElementById('result');
+        console.log(btnLike)
+          // 현재 화면에 표시된 값
+          let number = resultElement.innerText;
+       
+          // 더하기/빼기
+          if(!btnLike.classList.contains("done")) {
+            btnLike.classList.add("done")
+            number = parseInt(number) + 1;
+          }else if(btnLike.classList.contains("done"))  {
+             btnLike.classList.remove("done")
+            number = parseInt(number) - 1;
+          }
+          if(number >= 2) {
+             number = 1;
+          }else if(number <= -1)  {
+             number = 0;
+          }
+          // 결과 출력
+          resultElement.innerText = number;
+      })
+
+</script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
+      defer
+></script>
+
+
 </body>
 </html>
