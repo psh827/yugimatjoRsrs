@@ -11,6 +11,7 @@ import com.matjo.rsrs.ambiance.Ambiance;
 import com.matjo.rsrs.data.DataSource;
 import com.matjo.rsrs.data.NamingService;
 import com.matjo.rsrs.location.Location;
+import com.matjo.rsrs.review.Review;
 
 public class RestaurantDao {
 	private DataSource dataSource;
@@ -163,6 +164,35 @@ public class RestaurantDao {
 			}
 			return null;
 	}
-	
+	public List<Review> getAllReview(long rid) {
+		String sql = "SELECT * FROM Review rv INNER JOIN Restaurant res ON rv.resId = res.rid WHERE res.rid=?";
+		List<Review> list = new ArrayList<Review>();
+		try {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, rid);
+			rs = pstmt.executeQuery();
+			Review review = null;
+			while(rs.next()) {
+				review = new Review();
+				review.setReviewId(rs.getLong("reviewId"));
+				review.setUserId(rs.getLong("userId"));
+				review.setResId(rs.getLong("resId"));
+				review.setReviewText(rs.getString("reviewText"));
+				list.add(review);
+			}
+			} finally {
+			dataSource.close(rs, pstmt, con);
+			}
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+			}
+			return list;
+	}
 	
 }

@@ -21,4 +21,7 @@ public class UserService {
 	public User getUserId(String userId) {
 		return userDao.getUserId(userId);
 	}
+	public boolean isValidUser(String passwd) {
+		return false;
+	}
 }

@@ -1,6 +1,8 @@
 package com.matjo.rsrs.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +31,10 @@ public class LoginServlet extends HttpServlet {
 		String passwd = request.getParameter("passwd");
 		
 		if (!userService.isValidUser(userId,passwd)) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('아이디와 비밀번호가 틀렸습니다.'); location.href='"+"/rsrs/main/main.jsp"+"';</script>"); 
+			writer.close();
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
 		}

@@ -3,6 +3,7 @@ package com.matjo.rsrs.restaurant;
 import java.util.List;
 
 import com.matjo.rsrs.location.Location;
+import com.matjo.rsrs.review.Review;
 
 public class RestaurantService {
 	private RestaurantDao restaurantDao;
@@ -21,5 +22,9 @@ public class RestaurantService {
 	
 	public Restaurant findResToSubpage(String resName){
 		return restaurantDao.findResToSubpage(resName);
+	}
+	
+	public List<Review> getAllReview(long rid) {
+		return restaurantDao.getAllReview(rid);
 	}
 }

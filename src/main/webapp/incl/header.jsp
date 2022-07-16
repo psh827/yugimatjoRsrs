@@ -27,10 +27,10 @@
             <a class="dropdown-item" href="#">단체가능</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark">등급보기</a>
-        </li>
         <%if(session.getAttribute("userId")==null){ %>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/rsrs/login/login">마이페이지</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link text-dark" href=" /rsrs/login/login">로그인</a>
         </li>
@@ -38,6 +38,9 @@
           <a class="nav-link color-primary" href="/rsrs/join/add_user.jsp">회원가입</a>
         </li>
         <%}else{ %>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/rsrs/login/mypage.jsp">마이페이지</a>
+        </li>
         <li class="nav-item">
         	<%=session.getAttribute("userId") %>님 환영합니다!
         </li>

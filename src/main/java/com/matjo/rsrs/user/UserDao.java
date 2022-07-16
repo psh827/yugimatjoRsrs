@@ -118,10 +118,7 @@ public class UserDao {
 	            pstmt = con.prepareStatement(sql);
 	            pstmt.setString(1, userId);
 	            pstmt.setString(2, passwd);
-	            System.out.println(userId);
-	            System.out.println(passwd);
 	            rs = pstmt.executeQuery();
-	            System.out.println(rs);
 	            if(!rs.next()) {
 	            	result = false;
 	            	return result;
@@ -135,6 +132,7 @@ public class UserDao {
 	      }      
 	      return result;
 	}
+	
 		
 
 

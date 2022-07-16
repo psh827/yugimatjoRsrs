@@ -32,7 +32,8 @@ public class AddResServlet extends HttpServlet {
 						throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String resName = request.getParameter("resName");
-		String resLocation= request.getParameter("resLocation");
+		String resLocation1= request.getParameter("resLocation1");
+		String resLocation2= request.getParameter("resLocation2");
 		String resScore = request.getParameter("resScore");
 		String foodType = request.getParameter("foodType");
 		String foodPrice = request.getParameter("foodPrice");
@@ -52,7 +53,7 @@ public class AddResServlet extends HttpServlet {
 			return;
 		}
 		Restaurant restaurant = new Restaurant();
-		Location location = new Location(resLocation);
+		Location location = new Location(resLocation1 + " " + resLocation2);
 		restaurant.setResName(resName);
 		restaurant.setResScore(Double.parseDouble(resScore));
 		restaurant.setFoodType(foodType);

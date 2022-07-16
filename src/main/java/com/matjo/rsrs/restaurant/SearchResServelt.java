@@ -1,6 +1,7 @@
 package com.matjo.rsrs.restaurant;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -41,6 +42,12 @@ public class SearchResServelt extends HttpServlet {
 		
 		RequestDispatcher dispatcher = null;
 		list = restaurantService.findResByCondition(resLocation1 + " " + resLocation2, foodType, Integer.parseInt(foodPrice), Integer.parseInt(resCapacity));
+		if (list.size() == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('검색하신 결과가 없습니다.'); location.href='"+"/rsrs/main/main.jsp"+"';</script>"); 
+			writer.close();
+		}
 		
 		
 		request.setAttribute("rList", list);

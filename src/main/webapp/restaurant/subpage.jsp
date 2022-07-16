@@ -95,21 +95,17 @@ ul,li { list-style: none;}
 <input class="btn btn-primary" type="reset" value="Reset">
   
 
-  <form action="review" method="post">
-   <div id="form-commentInfo">
-        <div id="comment-count">댓글 <span id="count">0</span></div>
-        <div class="comment-first"><p id="com_writer" class="comment-Id" name="userId">${userId}</p><input type='button' class="btn-like" value='❤'/> <span id='result'>0</span></div>
-        <br>
-        <input class="comment" type="text" id="comment-input reviewText" placeholder="댓글을 입력해 주세요." name="reviewText">
-        <input type="submit" value="등록" id="Comment_regist">
-    </div>
-</form>
 
 <div class="container-list">
       <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
             <tr>
                <td class="comment-list-title" align="left" bgcolor="beige">댓글</td>
             </tr>
+            <c:forEach var="text" items="${reviewList}">
+            <tr>
+            	<td>${text.getReviewText()}</td>
+            </tr>
+            </c:forEach>
       </table>
 
 </div>

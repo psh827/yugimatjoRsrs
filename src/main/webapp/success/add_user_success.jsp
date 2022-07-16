@@ -8,16 +8,25 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <link rel="stylesheet" href="../css/customize.css">
 <style type="text/css">
-   .container {height : 100vh; margin : 0 auto;}
+	.container {height : 100vh; margin : 0 auto;}
+	.join_txt {margin-top : 200px;}
+	.btn {
+  	 background: linear-gradient(90deg, rgba(255,113,31,1) 0%, rgba(255,202,155,1) 100%);
+     color: white;
+     width: 300px;
+     position: relative;
+     left: 25%;
+     margin-top : 100px;
+     }
 </style>
 </head>
 <body>
 <header id="header">
-   <div class="container-fluid">
+	<div class="container-fluid">
       <nav class="navbar navbar-light bg-primary">
 
         <div class="col-sm">
-            <a class="navbar-brand" href="/rsrs/restaurant/add_res.jsp"><img src="../img/logo/yugi.png" alt="logo"/>YUGIMATJO</a>
+         	<a class="navbar-brand" href="/rsrs/restaurant/add_res.jsp"><img src="../img/logo/yugi.png" alt="logo"/>YUGIMATJO</a>
         </div>
         <div class="col col-md-4">
         </div>
@@ -52,7 +61,7 @@
         </li>
         <%}else{ %>
         <li class="nav-item">
-           <%=request.getAttribute("userId") %>님 환영합니다!
+        	<%=session.getAttribute("userId") %>님 환영합니다!
         </li>
         <li class="nav-item">
           <a class="nav-link color-primary" href="/rsrs/login/logout">로그아웃</a>
@@ -63,11 +72,15 @@
 </header>
 
 <div class="container">
-   <%=session.getAttribute("userName") %> 님, 회원가입 되었습니다.
+	<div class="row join_txt">
+	 <h2>${userName} 님, 회원가입 되었습니다.</h2>
+	</div>
+	 <button class="btn" type="submit"><a style= "color:white;" href="/rsrs/main/main.jsp">뒤로가기</a></button>
+	
 </div>
 
 <footer>
-   <jsp:include page="/incl/footer.jsp"/>
+	<jsp:include page="/incl/footer.jsp"/>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
