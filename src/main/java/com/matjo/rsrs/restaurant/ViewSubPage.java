@@ -41,9 +41,6 @@ public class ViewSubPage extends HttpServlet {
 		
 		s = restaurantService.findResToSubpage(resName);
 		list = restaurantService.getAllReview(s.getRid());
-		for(Review rv : list) {
-			System.out.println(rv.toString());
-		}
 		
 		request.setAttribute("restaurant", s);
 		request.setAttribute("reviewList", list);
