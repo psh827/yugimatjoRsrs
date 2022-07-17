@@ -12,6 +12,16 @@
 #sido {
 	margin-top: 30px;
 }
+
+label {
+	display : block;
+	text-align : center;
+}
+
+input {
+	border-radius : 5px;
+	width: 100%!important;
+}
 </style>
 </head>
 <body>
@@ -21,58 +31,59 @@
 </header>
 
 <form action="add_res.do" method="post">
-	<div class="container filteringbox" style="background : none; margin-bottom : 150px;">
-		<div class="container filteringbox">
-	<div class="row">
-		식당이름 <input type="text" name="resName" style="margin :0 15px;">
-     </div>			
-	
-	<div class="col-sm-3">
-        <label for="state">음식종류</label>
-        <select class="custom-select d-block w-100" id="state" name="foodType" required>
-          <option value="">선택하세요.</option>
-          <option>한식</option>
-          <option>일식</option>
-          <option>중식</option>
-          <option>양식</option>
-          <option>분식</option>
-        </select>
+<div class="container filteringbox" style="padding : 100px;">
+	<div class="row" style="padding-top:10px;">
+		<div class="col-sm-3">
+			<label for="res">식당이름</label>
+			<input type="text" name="resName" id="res">
+		</div>
+		
+		<div class="col-sm-3">
+     	   <label for="state">음식종류</label>
+    	    <select class="custom-select d-block w-100" id="state" name="foodType" required>
+     	     <option value="">선택하세요.</option>
+     	     <option>한식</option>
+        	 <option>일식</option>
+       	 	 <option>중식</option>
+         	 <option>양식</option>
+         	 <option>분식</option>
+       		</select>
         <div class="invalid-feedback">
           Please provide a valid state.
         </div>
       </div>			
 				
-	<div class="col-sm-3">
-        <label for="state">예산</label>
-        <select class="custom-select d-block w-100" id="state" required name="foodPrice">
-          <option value="">선택하세요.</option>
-          <option>10000</option>
-          <option>30000</option>
-          <option>50000</option>
-          <option>60000</option>
-        </select>
+		<div class="col-sm-3">
+        	<label for="state">예산</label>
+       		<select class="custom-select d-block w-100" id="state" required name="foodPrice">
+         	 <option value="">선택하세요.</option>
+         	 <option>10000</option>
+         	 <option>30000</option>
+         	 <option>50000</option>
+         	 <option>60000</option>
+        	</select>
         <div class="invalid-feedback">
           Please provide a valid state.
         </div>
       </div>
       
 		<div class="col-sm-3">
-        <label for="state">인원</label>
-        <select class="custom-select d-block w-100" id="state" name="resCapacity" required>
-          <option value="">선택하세요.</option>
-          <option>2</option>
-          <option>10</option>
-        </select>
+     	   <label for="state">인원</label>
+       	 <select class="custom-select d-block w-100" id="state" name="resCapacity" required>
+       	   <option value="">선택하세요.</option>
+       	   <option>2</option>
+       	   <option>10</option>
+       	 </select>
         <div class="invalid-feedback">
           Please provide a valid state.
         </div>
-      </div>
+   		</div>
 	</div>
-			<div class="row">
-				<button type="submit">등록!</button>
-			</div>
-		</div>
+</div>
+	<div class="row">
+		<button type="submit">등록!</button>
 	</div>
+</div>
 </form>
 
 
