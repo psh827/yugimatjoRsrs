@@ -133,7 +133,35 @@ public class UserDao {
 	      return result;
 	}
 	
+	public String findGradeByUserId(String userId) {
+	      String sql = "SELECT grade FROM User WHERE userId = ?";
+	      String grade = "";
+		try {
+	         Connection con = null;
+	         PreparedStatement pstmt = null;
+	         ResultSet rs = null;
+	         try {
+	            con = dataSource.getConnection();
+	            pstmt = con.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            rs = pstmt.executeQuery();
+	            User user = null;
+	            while(rs.next()) {
+	               user = new User();
+	               user.setGrade(rs.getString("grade"));
+	               grade = user.getGrade();
+	            }
+	            
+	         } finally {
+	            dataSource.close(rs, pstmt, con);
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
 		
+		return grade;
+	   }
 
 
 }

@@ -41,6 +41,9 @@
   </style>
 </head>
 <body>
+<header id="header">
+      <jsp:include page="/incl/header.jsp"/>
+   </header>
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -84,6 +87,9 @@
       <p class="mb-1">&copy; 2022 YM</p>
     </footer>
   </div>
+  <footer>
+	<jsp:include page="/incl/footer.jsp"/>
+</footer>
   <script>
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
@@ -100,5 +106,6 @@
       });
     }, false);
   </script>
+  
 </body>
 </html>

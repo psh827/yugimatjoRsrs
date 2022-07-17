@@ -25,18 +25,6 @@
 		<div class="container filteringbox">
 	<div class="row">
 		식당이름 <input type="text" name="resName" style="margin :0 15px;">
-		평점 <input type="text" name="resScore" style="margin :0 15px;">	
-	<div class="col-sm-5">
-        <div id="sido">
-          위치 <select id="sidoSelect" onchange="changeSidoSelect();" class="custom-select d-block w-100" name="resLocation1">
-            <option value="">(시)를 선택하세요.</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-sm-5">
-        <select id="gugunSelect" onchange="changeSecondSelect();" class="custom-select d-block w-100 city" name="resLocation2">
-          <option value="">(구)를 선택하세요.</option>
-        </select>
      </div>			
 	
 	<div class="col-sm-3">
@@ -72,10 +60,8 @@
         <label for="state">인원</label>
         <select class="custom-select d-block w-100" id="state" name="resCapacity" required>
           <option value="">선택하세요.</option>
-          <option>1</option>
           <option>2</option>
-          <option>5</option>
-          <option>6</option>
+          <option>10</option>
         </select>
         <div class="invalid-feedback">
           Please provide a valid state.
@@ -98,6 +84,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+	var ismanager = "${userId}";
+	console.log(ismanager)
     //참고
     // 대분류
     var firstList = new Array("대구", "서울", "경기", "부산", "대전");
@@ -109,6 +98,9 @@
     var secondList5 = new Array("대덕구", "동구", "서구", "유성구", "중구");
     // 페이지 로딩시 자동 실행
     window.onload = function() {
+    	if(ismanager != "manager" || ismanager == null){
+    		location.href="/rsrs/main/main.jsp"
+    	}
       var v_sidoSelect = document.getElementById("sidoSelect"); // SELECT TAG
 
       for (i = 0; i < firstList.length; i++) { // 0 ~ 3

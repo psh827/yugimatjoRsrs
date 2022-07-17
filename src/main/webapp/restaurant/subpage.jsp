@@ -7,17 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/result_res.css">
 <link rel="stylesheet" href="../css/customize.css">
-<script type="module" src="./js/index.js"></script>
+<link rel="stylesheet" href="../css/result_res.css">
 <style>
 *{magin:0;padding:0;}
 ul,li { list-style: none;}
-.container {width:1000px; margin:0 auto;}
+.container {width:1000px; margin:0 auto; padding-top:0;}
 .card-body {display:flex;text-align: center;height:100%;}
 .sub-name-title,.sub-name-input { padding: 20px; display: flex; flex-direction: column;}
 .sub-name-title {font-size: 20px;text-align: center; padding-right:20px; margin:0 auto;}
-.sub-name-title ul li {padding-bottom:20px;}
+.sub-name-title ul li {padding-bottom:20px; margin-bottom: 10px;}
 .sub-name-input {margin-top:12px;}
 .sub-input-text{margin:5px;height: 20px;}
 .resname-first{font-size:30px; font-weight:bold;}
@@ -45,6 +44,10 @@ ul,li { list-style: none;}
 #map {
   height: 500px;
 }
+.resInfo{
+font-weight: bold;
+color: #FF853A;
+}
 </style>
 
 </head>
@@ -54,7 +57,6 @@ ul,li { list-style: none;}
    </header>
 <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row">
         <div class="col">
           <div class="card mb-4 shadow-sm">
@@ -63,21 +65,27 @@ ul,li { list-style: none;}
                <div class="sub-name-title">
                   <ul>
                      <li class="resname-first">
+                     	<p class="resInfo">식당이름</p>
                         ${restaurant.resName}
                      </li>
                      <li>
+                     	<p class="resInfo">식당주소</p>
                         ${restaurant.location.regionName}
                      </li>
                      <li>
+                     	<p class="resInfo">식당평점</p>
                         ${restaurant.resScore}
                      </li>
                      <li>
+                     	<p class="resInfo">음식종류</p>
                         ${restaurant.foodType}
                      </li>
                      <li>
+                     	<p class="resInfo">예상가격</p>
                         ${restaurant.foodPrice}
                      </li>
                      <li>
+                     	<p class="resInfo">최대인원</p>
                         ${restaurant.resCapacity}
                      </li>
                   </ul>
@@ -112,12 +120,33 @@ ul,li { list-style: none;}
       </div>
   </div>
   
-<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
       defer
-></script>
-
+    ></script>
+<script>
+	var lng = "${lng}"
+	var lat = "${lat}"
+	var resName = "${resName}"
+	lng = Number(lng);
+	lat = Number(lat);
+	console.log(lng);
+	console.log(lat);
+    function initMap() {
+      var seoul = { lat: lat, lng: lng};
+      var map = new google.maps.Map(
+        document.getElementById('map'), {
+          zoom: 18,
+          center: seoul
+        });
+      new google.maps.Marker({
+    	    position: seoul,
+    	    map: map,
+    	    label: resName
+    	});
+      
+    }
+ </script>
 
 </body>
 </html>

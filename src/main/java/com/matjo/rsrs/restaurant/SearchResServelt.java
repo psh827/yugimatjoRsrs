@@ -33,20 +33,25 @@ public class SearchResServelt extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String resLocation1= request.getParameter("resLocation1");
 		String resLocation2= request.getParameter("resLocation2");
+		String resLocation = resLocation1 + " " + resLocation2;
 		String foodType = request.getParameter("foodType");
 		String foodPrice = request.getParameter("foodPrice");
 		String resCapacity = request.getParameter("resCapacity");
 		
 		foodPrice = subStringCost(foodPrice);
 		resCapacity = resCapacity.split("인")[0];
+		if (Integer.parseInt(resCapacity) > 2) {
+			resCapacity = "10";
+		}
 		
 		RequestDispatcher dispatcher = null;
-		list = restaurantService.findResByCondition(resLocation1 + " " + resLocation2, foodType, Integer.parseInt(foodPrice), Integer.parseInt(resCapacity));
+		list = restaurantService.findResByCondition(resLocation, foodType, Integer.parseInt(foodPrice), Integer.parseInt(resCapacity));
 		if (list.size() == 0) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>alert('검색하신 결과가 없습니다.'); location.href='"+"/rsrs/main/main.jsp"+"';</script>"); 
 			writer.close();
+			return;
 		}
 		
 		

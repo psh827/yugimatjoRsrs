@@ -101,7 +101,7 @@
 <script type="text/javascript">
     //참고
     // 대분류
-    var firstList = new Array("대구", "서울", "경기", "부산", "대전");
+    var firstList = new Array("대구광역시", "서울특별시", "경기도", "부산광역시", "대전광역시");
     // 중분류
     var secondList1 = new Array("달서구", "중구", "수성구", "서구", "남구", "달성군", "동구", "북구");
     var secondList2 = new Array("강남", "강북", "성북구", "서초구", "성동구", "금천구", "동대문구");

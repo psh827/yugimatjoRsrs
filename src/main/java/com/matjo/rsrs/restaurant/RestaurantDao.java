@@ -95,7 +95,7 @@ public class RestaurantDao {
 		String sql = "Select r.*, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', "
 				+ "ab.cost / ab.costScore as '가성비', ab.dating / ab.datingScore as '데이트하기좋은', ab.family / ab.familyScore as '가족' FROM Restaurant r "
 				+ "INNER JOIN Ambiance ab ON r.rId = ab.resId INNER JOIN Location "
-				+ "lo ON r.rId = lo.resId WHERE lo.regionName=? AND r.foodType=? "
+				+ "lo ON r.rId = lo.resId WHERE lo.regionName LIKE ? AND r.foodType=? "
 				+ "AND r.foodPrice BETWEEN 0 AND ? AND r.resCapacity BETWEEN 1 AND ?";
 		List<Restaurant> list = new ArrayList<>();
 		try {
@@ -105,7 +105,7 @@ public class RestaurantDao {
 			try {
 				con = dataSource.getConnection();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, resLocation);
+				pstmt.setString(1, "%" + resLocation + "%");
 				pstmt.setString(2, foodType);
 				pstmt.setInt(3, foodPrice);
 				pstmt.setInt(4, resCapacity);
@@ -134,7 +134,7 @@ public class RestaurantDao {
 	}
 	
 	public Restaurant findResToSubpage(String resName) {
-			String sql = "SELECT * FROM Restaurant WHERE resName=?";
+			String sql = "SELECT r.*, lo.regionName FROM Restaurant r INNER JOIN Location lo ON r.rId = lo.resId WHERE resName=?";
 			try {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -153,6 +153,7 @@ public class RestaurantDao {
 				res.setFoodType(rs.getString("foodType"));
 				res.setFoodPrice(rs.getInt("foodPrice"));
 				res.setResCapacity(rs.getInt("resCapacity"));
+				res.setLocation(new Location(rs.getString("regionName")));
 				return res;
 			}
 			} finally {

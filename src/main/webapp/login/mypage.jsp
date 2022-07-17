@@ -58,7 +58,7 @@
             </div>
            
           </div>
-            <button class="btn" type="submit" onclick="location.href='/rsrs/login/userInformation'">조회하기</button>
+            <button class="btn" type="submit">조회하기</button>
         </form>
       </div>
     </div>

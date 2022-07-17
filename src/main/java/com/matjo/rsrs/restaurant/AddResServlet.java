@@ -1,8 +1,11 @@
 package com.matjo.rsrs.restaurant;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.matjo.rsrs.googleapi.GoogleApi;
 import com.matjo.rsrs.location.Location;
 
 
@@ -31,29 +36,40 @@ public class AddResServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 						throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(false);
+		String userId = (String)session.getAttribute("userId");
+		System.out.println(userId);
+		if(userId == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('로그인해주세요.'); location.href='"+"/rsrs/login/login"+"';</script>"); 
+			writer.close();
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			return;
+		}
+		Map<String,String> resMap = new HashMap<String, String>();
 		String resName = request.getParameter("resName");
-		String resLocation1= request.getParameter("resLocation1");
-		String resLocation2= request.getParameter("resLocation2");
-		String resScore = request.getParameter("resScore");
+		resMap = GoogleApi.getDetail(resName);
+		if(resMap.size() == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('해당식당은 없습니다. 다시 검색해주세요.'); location.href='"+"/rsrs/restaurant/add_res.jsp"+"';</script>"); 
+			writer.close();
+			request.getRequestDispatcher("add_res.jsp").forward(request, response);
+			return;
+		}
+		String resLocation = resMap.get("addr");
+		String resScore = resMap.get("rating");
 		String foodType = request.getParameter("foodType");
 		String foodPrice = request.getParameter("foodPrice");
 		String resCapacity = request.getParameter("resCapacity");
 		
 		//2. 유효성 검증 및 변환
-		List<String> errorMsgs = new ArrayList();
-		if(resName == null || resName.length() == 0) {
-			errorMsgs.add("가게이름은 필수입력 정보입니다.");
-		}
 		
 		RequestDispatcher dispatcher = null;
-		if(errorMsgs.size() > 0) {
-			request.setAttribute("errorMsgs", errorMsgs);
-			dispatcher = request.getRequestDispatcher("/error/add_res_error.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
+		
 		Restaurant restaurant = new Restaurant();
-		Location location = new Location(resLocation1 + " " + resLocation2);
+		Location location = new Location(resLocation);
 		restaurant.setResName(resName);
 		restaurant.setResScore(Double.parseDouble(resScore));
 		restaurant.setFoodType(foodType);

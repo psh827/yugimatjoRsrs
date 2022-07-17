@@ -37,6 +37,9 @@
      position: relative;
      left: 25%;
      }
+     .mb-3 {
+     text-align: center;
+     }
   </style>
 </head>
 <body>
@@ -47,12 +50,23 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-31">회원정보</h4>
-        <form class="validation-form" action="mypage" method="post">
+        <form class="validation-form" action="mypage" method="post" enctype="multipart/form-data">
           <div class="row">
             
              <div class="col-md-6 mb-3">
-              <label for="id">아이디 : <%=session.getAttribute("userId") %></label>
-          
+              <label for="id">아이디 : <%=session.getAttribute("userId") %></label><br>
+              <label for="id">등급 : ${grade}</label><br>
+             
+             <% String grade = (String)request.getAttribute("grade");
+             if(grade.equals("메추리알")) { %>
+          		<img alt="egg1" src="../img/egg/egg1.png">
+             <% } else if (grade.equals("계란")) {%>
+        		<img alt="egg1" src="../img/egg/egg2.png">
+           	<%} else if (grade.equals("타조알")) {%>
+           		<img alt="egg1" src="../img/egg/egg3.png">
+           	<%} else { %>
+           		<img alt="egg1" src="../img/egg/egg4.png">
+           	<%} %>
             </div>
            
           </div>
