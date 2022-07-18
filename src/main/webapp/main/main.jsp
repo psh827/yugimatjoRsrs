@@ -20,26 +20,14 @@
 		<div class="container filteringbox">
     <div class="row">
       <div class="col-sm-3">
-        <label for="state">예산</label>
-        <select class="custom-select d-block w-100" id="state" required name="foodPrice">
-          <option value="">선택하세요.</option>
-          <option>10,000원 미만</option>
-          <option>10,000 ~ 30,000원</option>
-          <option>30,000 ~ 50,000원</option>
-          <option>50,000 ~ 100,000원</option>
-        </select>
-        <div class="invalid-feedback">
-          Please provide a valid state.
-        </div>
-      </div>
-      <div class="col-sm-3">
         <label for="state">인원</label>
         <select class="custom-select d-block w-100" id="state" name="resCapacity" required>
           <option value="">선택하세요.</option>
           <option>1인</option>
           <option>2인</option>
-          <option>5인 이하</option>
-          <option>6인 이상</option>
+          <option>3인</option>
+          <option>4인</option>
+          <option>6인</option>
         </select>
         <div class="invalid-feedback">
           Please provide a valid state.
@@ -53,6 +41,7 @@
           <option>일식</option>
           <option>중식</option>
           <option>양식</option>
+          <option>아시안</option>
           <option>분식</option>
         </select>
         <div class="invalid-feedback">
@@ -86,7 +75,7 @@
       <div class="col text-center" style="margin-top:50px;">
         <h1 class=" text-danger font-weight-bold">여기맛조</h1>
         <h1>맛집을 추천하고, 추천받고 !</h1>
-        <h1 class=" font-weight-bold">여기 맛줘와 맛있는 하루를</h1>
+        <h1 class=" font-weight-bold">여기 맛조와 맛있는 하루를</h1>
       </div>
     </div>
   </div>
@@ -101,11 +90,11 @@
 <script type="text/javascript">
     //참고
     // 대분류
-    var firstList = new Array("대구광역시", "서울특별시", "경기도", "부산광역시", "대전광역시");
+    var firstList = new Array("대구광역시", "서울특별시", "울산광역시", "부산광역시", "대전광역시");
     // 중분류
     var secondList1 = new Array("달서구", "중구", "수성구", "서구", "남구", "달성군", "동구", "북구");
-    var secondList2 = new Array("강남", "강북", "성북구", "서초구", "성동구", "금천구", "동대문구");
-    var secondList3 = new Array("남양주", "고양", "일산동구", "일산서구");
+    var secondList2 = new Array("강남구", "강북구", "성북구", "서초구", "성동구", "금천구", "동대문구");
+    var secondList3 = new Array("중구", "동구", "남구", "북구", "울주군");
     var secondList4 = new Array("강서구", "금정구", "동래구", "수영구");
     var secondList5 = new Array("대덕구", "동구", "서구", "유성구", "중구");
     // 페이지 로딩시 자동 실행

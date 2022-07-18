@@ -20,6 +20,12 @@ public class RestaurantDao {
 		NamingService namingService = NamingService.getInstance();
 		dataSource = (DataSource)namingService.getAttribute("dataSource");
 	}
+	
+	/**
+	 * 레스토랑 등록하기. 틍록 시 FK로 연결되어있는 Location, Ambiance에도 같이 등록.
+	 * @param res
+	 * @param location
+	 */
 	public void addRes(Restaurant res, Location location) {
 		String sql = "INSERT INTO Restaurant(resName, resScore, "
 				+ " foodType, foodPrice, resCapacity) "
@@ -58,6 +64,11 @@ public class RestaurantDao {
 		}
 	}
 	
+	/**
+	 * 레스토랑이름으로 rId(PK)키 얻기
+	 * @param resName
+	 * @return
+	 */
 	public Restaurant getResId(String resName) {
 		String sql = "SELECT rId FROM Restaurant WHERE resName=?";
 		long rid = 0;
@@ -89,14 +100,20 @@ public class RestaurantDao {
 	}
 	
 	
-	
-	public List<Restaurant> findResByCondition(String resLocation, String foodType, 
-							int foodPrice, int resCapacity) {
-		String sql = "Select r.*, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', "
+	/**
+	 * 유저가 검색조건으로 검색시 검색 조건에 맞는 음식점 리스트로 반환
+	 * @param resLocation
+	 * @param resLocationDesc
+	 * @param foodType
+	 * @param resCapacity
+	 * @return
+	 */
+	public List<Restaurant> findResByCondition(String resLocation, String resLocationDesc, String foodType, 
+							int resCapacity) {
+		String sql = "Select r.resName, r.resScore, r.foodType, r.foodPrice, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', "
 				+ "ab.cost / ab.costScore as '가성비', ab.dating / ab.datingScore as '데이트하기좋은', ab.family / ab.familyScore as '가족' FROM Restaurant r "
 				+ "INNER JOIN Ambiance ab ON r.rId = ab.resId INNER JOIN Location "
-				+ "lo ON r.rId = lo.resId WHERE lo.regionName LIKE ? AND r.foodType=? "
-				+ "AND r.foodPrice BETWEEN 0 AND ? AND r.resCapacity BETWEEN 1 AND ?";
+				+ "lo ON r.rId = lo.resId WHERE (lo.regionName LIKE ? OR lo.regionName LIKE ?) AND r.foodType=? ";
 		List<Restaurant> list = new ArrayList<>();
 		try {
 			Connection con = null;
@@ -106,19 +123,17 @@ public class RestaurantDao {
 				con = dataSource.getConnection();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + resLocation + "%");
-				pstmt.setString(2, foodType);
-				pstmt.setInt(3, foodPrice);
-				pstmt.setInt(4, resCapacity);
+				pstmt.setString(2, "%" + resLocationDesc + "%");
+				pstmt.setString(3, foodType);
 				rs = pstmt.executeQuery();
 				Restaurant res = null;
 				while(rs.next()) {
 					res = new Restaurant();
-					res.setRid(rs.getLong("rId"));
 					res.setResName(rs.getString("resName"));
 					res.setResScore(rs.getDouble("resScore"));
 					res.setFoodType(rs.getString("foodType"));
-					res.setFoodPrice(rs.getInt("foodPrice"));
-					res.setResCapacity(rs.getInt("resCapacity"));
+					res.setFoodPrice(rs.getInt("foodPrice") * resCapacity);
+					res.setResCapacity(resCapacity);
 					res.setAmbiance(new Ambiance(rs.getDouble("편안한"), rs.getDouble("럭셔리한"),
 							rs.getDouble("가성비"), rs.getDouble("데이트하기좋은"), rs.getDouble("가족")));
 					list.add(res);
@@ -133,6 +148,11 @@ public class RestaurantDao {
 		return list;
 	}
 	
+	/**
+	 * 상세페이지에 표시될 데이터를 가져오는 쿼리
+	 * @param resName
+	 * @return
+	 */
 	public Restaurant findResToSubpage(String resName) {
 			String sql = "SELECT r.*, lo.regionName FROM Restaurant r INNER JOIN Location lo ON r.rId = lo.resId WHERE resName=?";
 			try {
@@ -165,6 +185,12 @@ public class RestaurantDao {
 			}
 			return null;
 	}
+	
+	/**
+	 * 상세페이지 하단 리뷰를 불러오는 쿼리. 리뷰가 있다면 로드 시 생성됨
+	 * @param rid
+	 * @return
+	 */
 	public List<Review> getAllReview(long rid) {
 		String sql = "SELECT * FROM Review rv INNER JOIN Restaurant res ON rv.resId = res.rid WHERE res.rid=?";
 		List<Review> list = new ArrayList<Review>();

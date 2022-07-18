@@ -15,7 +15,6 @@
      color: white;
      width: 300px;
      position: relative;
-     left: 25%;
      margin-top : 100px;
      }
 </style>
@@ -71,13 +70,15 @@
     </div>
 </header>
 
-<div class="container">
+
 	<div class="row join_txt">
-	 <h2>${userName} 님, 회원가입 되었습니다.</h2>
+		 <h2>${userName} 님, 회원가입 되었습니다.</h2>
 	</div>
-	 <button class="btn" type="submit"><a style= "color:white;" href="/rsrs/main/main.jsp">뒤로가기</a></button>
+	<div class="row" style="padding : 0; margin-bottom : 250px;">
+		<button class="btn" style="width : 150px;" type="submit"><a style= "color:white;" href="/rsrs/main/main.jsp">뒤로가기</a></button>	
+	</div>
 	
-</div>
+
 
 <footer>
 	<jsp:include page="/incl/footer.jsp"/>

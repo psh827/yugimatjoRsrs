@@ -85,18 +85,7 @@ public class GoogleApi {
 			        if(object.get("formatted_address") != null) {
 			        	resInfo.put("addr", object.get("formatted_address").toString());
 			        }
-			        System.out.println(resInfo.get("location"));
 			    }
 				return resInfo;
-	}
-	
-	public static void main(String[] args) {
-		GoogleApi ga = new GoogleApi();
-		try {
-			ga.getLocation("동북횟집");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.matjo.rsrs.review;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -42,27 +43,33 @@ public class ReviewServlet extends HttpServlet {
       restaurantService = new RestaurantService(new RestaurantDao());
    }
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   resName = request.getParameter("resName");
-//	   Restaurant s = restaurantService.findResToSubpage(resName);
-//	   long rid = s.getRid();
-	   request.setAttribute("resName", resName);
+	   HttpSession session = request.getSession();
+	   if(session.getAttribute("nickName") == null) {
+		   response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('로그인을 먼저 해주세요.'); location.href='"+"/rsrs/login/login"+"';</script>"); 
+			writer.close();
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			return;
+	   }
 	   RequestDispatcher rd = request.getRequestDispatcher("/restaurant/addReview.jsp");
 	   rd.forward(request, response);
    }
    
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	  request.setCharacterEncoding("UTF-8"); 
+	  response.setContentType("text/html; charset=UTF-8");
       HttpSession session = request.getSession();
-      response.setCharacterEncoding("UTF-8");
+      
       // 1. 폼 파라메터 열기
       String userId = (String) session.getAttribute("userId");
       String referer = request.getHeader("referer").split("=")[1];
       referer = URLDecoder.decode(referer, "UTF-8");
-      System.out.println(referer);
       Restaurant res = restaurantService.findResToSubpage(referer);
       String reviewText = request.getParameter("reviewText");
       String recommandScore = request.getParameter("recommandScore");
       User user = userService.getUserId(userId);
-      System.out.println(user.getuId());
+      
       // 2. 유효성 검증 및 변환
       List<String> errorMsgs = new ArrayList<>();
       if(reviewText == null) {
@@ -77,19 +84,15 @@ public class ReviewServlet extends HttpServlet {
 
       //3. 비즈니스 서비스 호출
       reviewService.addReview(review);	
-  		Restaurant s = restaurantService.findResToSubpage(referer);
+  	  Restaurant s = restaurantService.findResToSubpage(referer);
   		
-  		resName = redirect(referer);
+  	  resName = redirect(referer);
   	
-	  	request.setAttribute("restaurant", s);
-	  	request.setAttribute("resName", resName);
-	  	
-	  	
-	  	
-	  	response.sendRedirect(resName);
-	  	
-//	  	RequestDispatcher rd = request.getRequestDispatcher("/restaurant/subpage.jsp");
-//		rd.forward(request, response);
+	  request.setAttribute("restaurant", s);
+	  request.setAttribute("resName", resName);
+
+	  response.sendRedirect(resName);
+
    }
    public String redirect(String name) throws UnsupportedEncodingException {
 	    String encodedParam = URLEncoder.encode(name, "UTF-8");

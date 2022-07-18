@@ -40,6 +40,7 @@
      .mb-3 {
      text-align: center;
      }
+     .egg {margin-top: 50px;}
   </style>
 </head>
 <body>
@@ -56,16 +57,17 @@
              <div class="col-md-6 mb-3">
               <label for="id">아이디 : <%=session.getAttribute("userId") %></label><br>
               <label for="id">등급 : ${grade}</label><br>
+              <label for="id">포인트 : ${point}</label><br>
              
              <% String grade = (String)request.getAttribute("grade");
              if(grade.equals("메추리알")) { %>
-          		<img alt="egg1" src="../img/egg/egg1.png">
+          		<img class="egg" alt="egg1" src="../img/egg/egg1.png">
              <% } else if (grade.equals("계란")) {%>
-        		<img alt="egg1" src="../img/egg/egg2.png">
+        		<img class="egg" alt="egg1" src="../img/egg/egg2.png">
            	<%} else if (grade.equals("타조알")) {%>
-           		<img alt="egg1" src="../img/egg/egg3.png">
+           		<img class="egg" alt="egg1" src="../img/egg/egg3.png">
            	<%} else { %>
-           		<img alt="egg1" src="../img/egg/egg4.png">
+           		<img class="egg" alt="egg1" src="../img/egg/egg4.png">
            	<%} %>
             </div>
            

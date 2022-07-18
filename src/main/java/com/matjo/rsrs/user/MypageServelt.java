@@ -51,9 +51,11 @@ public class MypageServelt extends HttpServlet {
 		}
 		
 		String grade = userService.getGrade(userId);
+		int point = userService.getPointByUserId(userId);
 		
 		RequestDispatcher dispatcher = null;
 		request.setAttribute("grade", grade);
+		request.setAttribute("point", point);
 		dispatcher = request.getRequestDispatcher("userInformation.jsp");
 		dispatcher.forward(request, response);
 	}

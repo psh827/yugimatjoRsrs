@@ -1,3 +1,8 @@
+DROP TABLE Review;
+DROP TABLE Ambiance;
+DROP TABLE Location;
+DROP TABLE Restaurant;
+
 CREATE TABLE User (
 	uId			BIGINT			PRIMARY KEY AUTO_INCREMENT,
 	userName 	VARCHAR(20)		NOT NULL,
@@ -46,6 +51,7 @@ WHEN B.point >=700 THEN '타조알'
 WHEN B.point >=1200 THEN '독수리알'
 END;
 
+INSERT INTO Review (userId, resId, reviewText) VALUES (1002, 2002, '안녕하세요');
 
 CREATE TABLE Account (
 	pId				BIGINT			PRIMARY KEY AUTO_INCREMENT,
@@ -84,30 +90,25 @@ CREATE TABLE Location (
 CREATE TABLE Ambiance (
 	aId				BIGINT			PRIMARY KEY AUTO_INCREMENT,
 	resId 			BIGINT			NOT NULL,
-	comfort			INT				NOT NULL		DEFAULT 0,
-	luxury			INT				NOT NULL		DEFAULT 0,
-	cost			INT				NOT NULL		DEFAULT 0,
-	dating			INT				NOT NULL		DEFAULT 0,
-	family			INT				NOT NULL		DEFAULT 0,
-	comfortScore	INT				NOT NULL		DEFAULT 0,
-	luxuryScore		INT				NOT NULL		DEFAULT 0,
-	costScore		INT				NOT NULL		DEFAULT 0,
-	datingScore		INT				NOT NULL		DEFAULT 0,
-	familyScore		INT				NOT NULL		DEFAULT 0,
+	comfort			INT				NOT NULL		DEFAULT 1,
+	luxury			INT				NOT NULL		DEFAULT 1,
+	cost			INT				NOT NULL		DEFAULT 1,
+	dating			INT				NOT NULL		DEFAULT 1,
+	family			INT				NOT NULL		DEFAULT 1,
+	comfortScore	INT				NOT NULL		DEFAULT 1,
+	luxuryScore		INT				NOT NULL		DEFAULT 1,
+	costScore		INT				NOT NULL		DEFAULT 1,
+	datingScore		INT				NOT NULL		DEFAULT 1,
+	familyScore		INT				NOT NULL		DEFAULT 1,
 	
 	CONSTRAINT Ambiance_resId_FK FOREIGN KEY (resId) REFERENCES Restaurant(rId)
 ) AUTO_INCREMENT = 6001;
 
 
+UPDATE Account SET point = 700 WHERE userId=1002;
 
-DROP TABLE User;
-DROP TABLE Restaurant;
-DROP TABLE Location;
-DROP TABLE Account;
-DROP TABLE Review;
-DROP TABLE Ambiance;
 DELETE FROM User WHERE userId='dhdp564';
-DELETE FROM Restaurant WHERE rId=2006;
+DELETE FROM Restaurant WHERE rId=2042;
 SELECT r.*, lo.regionName, ab.comfort / ab.comfortScore as '편안한', ab.luxury / ab.luxuryScore as '럭셔리한', 
 ab.cost / ab.costScore as '가성비', ab.dating / ab.datingScore as '데이트하기좋은', ab.family / ab.familyScore as '가족' FROM Restaurant r 
 INNER JOIN Ambiance ab ON r.rId = ab.resId INNER JOIN Location 

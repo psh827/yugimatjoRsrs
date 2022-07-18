@@ -46,6 +46,7 @@ input {
         	 <option>일식</option>
        	 	 <option>중식</option>
          	 <option>양식</option>
+         	 <option>아시안</option>
          	 <option>분식</option>
        		</select>
         <div class="invalid-feedback">
@@ -58,26 +59,21 @@ input {
        		<select class="custom-select d-block w-100" id="state" required name="foodPrice">
          	 <option value="">선택하세요.</option>
          	 <option>10000</option>
+         	 <option>15000</option>
+         	 <option>20000</option>
+         	 <option>25000</option>
          	 <option>30000</option>
+         	 <option>35000</option>
+         	 <option>40000</option>
+         	 <option>45000</option>
          	 <option>50000</option>
-         	 <option>60000</option>
         	</select>
         <div class="invalid-feedback">
           Please provide a valid state.
         </div>
       </div>
       
-		<div class="col-sm-3">
-     	   <label for="state">인원</label>
-       	 <select class="custom-select d-block w-100" id="state" name="resCapacity" required>
-       	   <option value="">선택하세요.</option>
-       	   <option>2</option>
-       	   <option>10</option>
-       	 </select>
-        <div class="invalid-feedback">
-          Please provide a valid state.
-        </div>
-   		</div>
+		
 	</div>
 </div>
 	<div class="row">

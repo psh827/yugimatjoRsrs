@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.matjo.rsrs.location.Location;
 
@@ -34,18 +35,13 @@ public class SearchResServelt extends HttpServlet {
 		String resLocation1= request.getParameter("resLocation1");
 		String resLocation2= request.getParameter("resLocation2");
 		String resLocation = resLocation1 + " " + resLocation2;
+		String resLocationDesc = resLocation2 + " " + resLocation1;
 		String foodType = request.getParameter("foodType");
-		String foodPrice = request.getParameter("foodPrice");
 		String resCapacity = request.getParameter("resCapacity");
 		
-		foodPrice = subStringCost(foodPrice);
 		resCapacity = resCapacity.split("인")[0];
-		if (Integer.parseInt(resCapacity) > 2) {
-			resCapacity = "10";
-		}
-		
 		RequestDispatcher dispatcher = null;
-		list = restaurantService.findResByCondition(resLocation, foodType, Integer.parseInt(foodPrice), Integer.parseInt(resCapacity));
+		list = restaurantService.findResByCondition(resLocation, resLocationDesc, foodType, Integer.parseInt(resCapacity));
 		if (list.size() == 0) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
@@ -71,9 +67,21 @@ public class SearchResServelt extends HttpServlet {
 		realResult = result[2].split("원")[0];	
 		
 		realResult = realResult.replace(",", "");
-		System.out.println(realResult);
 		
 		return realResult;
 	}
 	
+	public String subStringFirstCost(String foodPrice) {
+		String[] result = foodPrice.split(" ");
+		String realResult = "";
+		if(result.length <= 2) {
+			realResult = result[0].split("원")[0];
+			return realResult.replace(",", "");
+		}
+		realResult = result[0];	
+		
+		realResult = realResult.replace(",", "");
+		
+		return realResult;
+	}
 }

@@ -9,11 +9,7 @@ public class ReviewService {
 	public ReviewService(ReviewDao reviewDao) {
 		this.reviewDao = reviewDao;
 	}
-
-	public ReviewService() {
-
-	}
-
+	
 	public void addReview(Review review) {
 		reviewDao.addReview(review);
 	}
@@ -22,16 +18,8 @@ public class ReviewService {
 		reviewDao.updateAccount(review);
 	}
 
-//	public List<User> findUser() {
-//		return userDao.findAllUsers();
-//	}
-//
-//	public static ReviewService getInstance() {
-//		return service;
-//	}
-//
-//	public void setUserDao(UserDao userDao) {
-//		this.userDao = userDao;
-//	}
+	public List<Long> getUidByResName(Long resName) {
+		return reviewDao.getUidByResName(resName);
+	}
 
 }

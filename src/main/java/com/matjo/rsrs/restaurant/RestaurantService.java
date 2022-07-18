@@ -16,8 +16,8 @@ public class RestaurantService {
 		restaurantDao.addRes(restaurant, location);	
 	}
 	
-	public List<Restaurant> findResByCondition(String resLocation, String foodType, int foodPrice, int resCapacity) {
-		return restaurantDao.findResByCondition(resLocation, foodType, foodPrice, resCapacity);
+	public List<Restaurant> findResByCondition(String resLocation, String resLocationDesc, String foodType, int resCapacity) {
+		return restaurantDao.findResByCondition(resLocation, resLocationDesc, foodType, resCapacity);
 	}
 	
 	public Restaurant findResToSubpage(String resName){

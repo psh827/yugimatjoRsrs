@@ -47,9 +47,10 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 		}
-		
+		User user = userService.getUserId(userId);
 		
 		session.setAttribute("userId", userId);
+		session.setAttribute("nickName", user.getNickname());
 		response.sendRedirect("/rsrs/main/main.jsp");
 	}
 

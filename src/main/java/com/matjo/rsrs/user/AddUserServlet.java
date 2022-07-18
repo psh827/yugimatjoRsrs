@@ -1,6 +1,7 @@
 package com.matjo.rsrs.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,27 +37,26 @@ public class AddUserServlet extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		
 		
-		List<String>errorMsgs = new ArrayList<>();
-		if (userName == null || userName.length() == 0) {
-			errorMsgs.add("이름은 필수입력 정보이다.");
+		if (userService.isValidUser(userId)) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('이미 등록 된 아이디 입니다.'); location.href='"+"/rsrs/join/add_user.jsp"+"';</script>"); 
+			writer.close();
+			request.getRequestDispatcher("add_user.jsp").forward(request, response);
+			return;
 		}
-		if (userId == null || userId.length() == 0) {
-			errorMsgs.add("아이디는 필수입력 정보이다.");
-		}
-		if (passwd == null || passwd.length() == 0) {
-			errorMsgs.add("비밀번호는 필수입력 정보이다.");
-		}
-		if (nickname == null || nickname.length() == 0) {
-			errorMsgs.add("닉네임은 필수입력 정보이다.");
+		
+		if (userService.isValidUserByNickname(nickname)) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('이미 등록 된 닉네임 입니다.'); location.href='"+"/rsrs/join/add_user.jsp"+"';</script>"); 
+			writer.close();
+			request.getRequestDispatcher("add_user.jsp").forward(request, response);
+			return;
 		}
 		
 		RequestDispatcher dispatcher = null;
-		if (errorMsgs.size() > 0) {
-			request.setAttribute("오류", errorMsgs);
-			dispatcher = request.getRequestDispatcher("/error/add_user_error.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
+		
 		User user = new User();
 		user.setUserName(userName);
 		user.setUserId(userId);

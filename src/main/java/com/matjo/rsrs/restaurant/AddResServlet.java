@@ -74,7 +74,6 @@ public class AddResServlet extends HttpServlet {
 		restaurant.setResScore(Double.parseDouble(resScore));
 		restaurant.setFoodType(foodType);
 		restaurant.setFoodPrice(Integer.parseInt(foodPrice));
-		restaurant.setResCapacity(Integer.parseInt(resCapacity));
 		
 		//3. 비즈니스 서비스 호출
 		restaurantService.addRes(restaurant, location);

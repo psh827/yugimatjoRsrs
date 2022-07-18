@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<link rel="stylesheet" href="./css/customize.css">
 <style>
 .mainCon {margin:0 auto;}
 .writeTitle{
@@ -61,19 +63,32 @@
 </style>
 </head>
 <body>
+
+<header id="header">
+	<jsp:include page="/incl/admin_header.jsp"/>
+</header>
+
 	<section>
         <div class="mainCon">
             <div class="writeTitle">리뷰 쓰기</div>
         <div class="comment-first"><p id="com_writer" class="comment-Id"><span style="font-weight: bold;">아이디 :</span> ${userId}</p></div>
-            <form class="writeForm" action="/rsrs/restaurant/review" method="post">
+            <form class="writeForm" action="/rsrs/restaurant/review" method="post" accept-charset="utf-8">
                 <div class="text-box">
                 	<textarea class="writeTextarea" name="reviewText" placeholder="리뷰를 입력해주세요"  required></textarea>
                 </div>
                 <div class="writeBtn">
-                <input type="submit" value="작성">&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="작성" style="margin-bottom : 30px; color : white;">&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </form>
         </div>
     </section>
+    
+<footer>
+	<jsp:include page="/incl/footer.jsp"/>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
 </body>
 </html>

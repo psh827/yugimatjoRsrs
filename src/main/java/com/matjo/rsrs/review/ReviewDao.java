@@ -20,9 +20,9 @@ public class ReviewDao {
 		String sql3 = "UPDATE User A INNER JOIN Account B ON "
 				+ "A.uid=B.userId "
 				+ "SET A.grade = "
-				+ "CASE WHEN B.point >= 300 THEN '계란' "
-				+ "WHEN B.point >=700 THEN '타조알' "
-				+ "WHEN B.point >=1200 THEN '독수리알'"
+				+ "CASE WHEN B.point >= 200 AND B.point <= 399 THEN '계란' "
+				+ "WHEN B.point >=400 AND B.point <= 599 THEN '타조알' "
+				+ "WHEN B.point >=600 THEN '독수리알'"
 				+ " ELSE '메추리알'"
 				+ "END";
 		try {
@@ -101,6 +101,33 @@ public class ReviewDao {
 			e.printStackTrace();
 		}
 		return reviewList;
+	}
+
+	public List<Long> getUidByResName(Long rId) {
+		String sql = "SELECT userId FROM Review rv INNER JOIN Restaurant res ON rv.resId = res.rid WHERE res.rid=?";
+		List<Long> list = new ArrayList<Long>();
+		Long userId = (long) 0;
+		try {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, rId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				userId = rs.getLong("userId");
+				list.add(userId);
+			}
+			} finally {
+			dataSource.close(rs, pstmt, con);
+			}
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+			}
+			return list;
 	}
 
 }
