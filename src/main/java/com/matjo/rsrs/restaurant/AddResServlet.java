@@ -58,6 +58,16 @@ public class AddResServlet extends HttpServlet {
 			request.getRequestDispatcher("add_res.jsp").forward(request, response);
 			return;
 		}
+		
+		if(restaurantService.isValidRes(resName)) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('해당식당은 이미 존재합니다.'); location.href='"+"/rsrs/restaurant/add_res.jsp"+"';</script>"); 
+			writer.close();
+			request.getRequestDispatcher("add_res.jsp").forward(request, response);
+			return;
+		}
+		
 		String resLocation = resMap.get("addr");
 		String resScore = resMap.get("rating");
 		String foodType = request.getParameter("foodType");

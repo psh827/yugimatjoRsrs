@@ -222,4 +222,30 @@ public class RestaurantDao {
 			return list;
 	}
 	
+	public boolean isValidRes(String resName) {
+		  String sql = "SELECT * FROM Restaurant WHERE resName = ?";
+	      boolean result = true;
+	      try {
+	         Connection con = null;
+	         PreparedStatement pstmt = null;
+	         ResultSet rs = null;
+	         try {
+	            con = dataSource.getConnection();
+	            pstmt = con.prepareStatement(sql);
+	            pstmt.setString(1, resName);
+	            rs = pstmt.executeQuery();
+	            if(!rs.next()) {
+	            	result = false;
+	            	return result;
+	            }
+	         } finally {
+	            dataSource.close(rs, pstmt, con);
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }      
+	      return result;
+	}
+	
 }

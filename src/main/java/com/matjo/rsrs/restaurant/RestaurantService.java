@@ -27,4 +27,8 @@ public class RestaurantService {
 	public List<Review> getAllReview(long rid) {
 		return restaurantDao.getAllReview(rid);
 	}
+	
+	public boolean isValidRes(String resName) {
+		return restaurantDao.isValidRes(resName);
+	}
 }
