@@ -195,7 +195,23 @@ width:138px;
             <c:if test="${not empty reviewList}">
             <c:forEach var="i" begin="0" end="${fn:length(reviewList) - 1}">
             <tr>
-            	<td style="width:20%;" >${nickName[i]}</td>
+            	<td style="width:20%;">
+            	<c:choose>
+				    <c:when test="${nickNameGrade[i] eq '메추리알'}">
+        	    		<img style="width: 20px;" src="../img/egg/egg1.png">
+    				</c:when>
+    				<c:when test="${nickNameGrade[i] eq '계란'}">	
+        	    		<img style="width: 20px;" src="../img/egg/egg2.png">
+    				</c:when>
+    				<c:when test="${nickNameGrade[i] eq '타조알'}">
+        	    		<img style="width: 20px;" src="../img/egg/egg3.png">
+    				</c:when>
+    				<c:otherwise>
+    					<img style="width: 20px;" src="../img/egg/egg4.png">
+   			 		</c:otherwise>
+				</c:choose>
+            	${nickName[i]}
+            	</td>
             	<td>${reviewList[i].getReviewText()}</td>
             </tr>
             </c:forEach>

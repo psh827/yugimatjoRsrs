@@ -316,6 +316,32 @@ public class UserDao {
 		
 		return nickName;
 	}
-
+	
+	public String findGradeByNickName(String nickName) {
+	      String sql = "SELECT grade FROM User WHERE nickName = ?";
+	      String grade = "";
+		try {
+	         Connection con = null;
+	         PreparedStatement pstmt = null;
+	         ResultSet rs = null;
+	         try {
+	            con = dataSource.getConnection();
+	            pstmt = con.prepareStatement(sql);
+	            pstmt.setString(1, nickName);
+	            rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	               grade = rs.getString("grade");
+	            }
+	            
+	         } finally {
+	            dataSource.close(rs, pstmt, con);
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+		
+		return grade;
+	   }
 
 }

@@ -50,7 +50,7 @@ public class ViewSubPage extends HttpServlet {
 		Restaurant s = null;
 		List<Long> uId = null;
 		List<String> nickNameList = new ArrayList<String>();
-		
+		List<String> nickNameGrade = new ArrayList<String>();
 		s = restaurantService.findResToSubpage(resName);
 		list = restaurantService.getAllReview(s.getRid());
 		uId = reviewService.getUidByResName(s.getRid());
@@ -58,10 +58,15 @@ public class ViewSubPage extends HttpServlet {
 			nickNameList.add(userService.getNickNameByuId(l));
 		}
 		
+		for(String grade : nickNameList) {
+			nickNameGrade.add(userService.findGradeByNickName(grade));
+		}
+		
 		request.setAttribute("restaurant", s);
 		request.setAttribute("reviewList", list);
 		request.setAttribute("nickName", nickNameList);
 		request.setAttribute("resName", resName);
+		request.setAttribute("nickNameGrade", nickNameGrade);
 		request.setAttribute("lng", lng);
 		request.setAttribute("lat", lat);
 		

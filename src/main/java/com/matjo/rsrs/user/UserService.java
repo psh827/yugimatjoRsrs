@@ -38,4 +38,7 @@ public class UserService {
 	public int getPointByUserId(String userId) {
 		return userDao.getPointByUserId(userId);
 	}
+	public String findGradeByNickName(String nickName) {
+		return userDao.findGradeByNickName(nickName);
+	}
 }
