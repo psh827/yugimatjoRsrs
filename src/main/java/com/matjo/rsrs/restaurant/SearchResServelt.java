@@ -2,6 +2,9 @@ package com.matjo.rsrs.restaurant;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +34,7 @@ public class SearchResServelt extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		request.setCharacterEncoding("UTF-8");
 		String resLocation1= request.getParameter("resLocation1");
 		String resLocation2= request.getParameter("resLocation2");
@@ -49,8 +53,14 @@ public class SearchResServelt extends HttpServlet {
 			writer.close();
 			return;
 		}
-		
-		
+		resLocation1 = redirect(resLocation1);
+		resLocation2 = redirect(resLocation2);
+		foodType = redirect(foodType);
+		resCapacity = redirect(resCapacity);
+		session.setAttribute("resLocation1", resLocation1);
+		session.setAttribute("resLocation2", resLocation2);
+		session.setAttribute("foodType", foodType);
+		session.setAttribute("resCapacity", resCapacity);
 		request.setAttribute("rList", list);
 		dispatcher = request.getRequestDispatcher("/restaurant/result.jsp");
 		dispatcher.forward(request, response);
@@ -83,5 +93,10 @@ public class SearchResServelt extends HttpServlet {
 		realResult = realResult.replace(",", "");
 		
 		return realResult;
+	}
+	public String redirect(String name) throws UnsupportedEncodingException {
+	    String encodedParam = URLDecoder.decode(name, "UTF-8");
+
+	    return encodedParam;
 	}
 }

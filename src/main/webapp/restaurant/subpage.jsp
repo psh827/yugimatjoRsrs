@@ -217,13 +217,13 @@ width:138px;
             </c:forEach>
             </c:if>
       </table>
-
 </div>
       </div>
   </div>
+  <button type="button" id="btnList">목록으로</button >
   
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ40&callback=initMap&v=weekly"
       defer
     ></script>
 <script>
@@ -249,6 +249,12 @@ width:138px;
     $(".btn-primary").click(function(){
         $(this).next().children(".am-star").toggleClass("on");
      });
+    $("#btnList").click(function(){
+    	var url = decodeURI("/rsrs/main/search_result.do?resCapacity=${resCapacity}인&foodType=${foodType}&resLocation1=${resLocation1}&resLocation2=${resLocation2}")
+    	console.log(url)
+        location.href=url;
+    });
+    
  </script>
 
 </body>
