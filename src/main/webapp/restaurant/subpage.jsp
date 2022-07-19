@@ -194,35 +194,35 @@ width:138px;
                <td class="comment-list-title" align="left" bgcolor="beige">리뷰</td>
             </tr>
             <c:if test="${not empty reviewList}">
-            <c:forEach var="i" begin="0" end="${fn:length(reviewList) - 1}">
-            <tr>
-            	<td style="width:20%;">
-            	<c:choose>
-				    <c:when test="${nickNameGrade[i] eq '메추리알'}">
-        	    		<img style="width: 20px;" src="../img/egg/egg1.png">
-    				</c:when>
-    				<c:when test="${nickNameGrade[i] eq '계란'}">	
-        	    		<img style="width: 20px;" src="../img/egg/egg2.png">
-    				</c:when>
-    				<c:when test="${nickNameGrade[i] eq '타조알'}">
-        	    		<img style="width: 20px;" src="../img/egg/egg3.png">
-    				</c:when>
-    				<c:otherwise>
-    					<img style="width: 20px;" src="../img/egg/egg4.png">
-   			 		</c:otherwise>
-				</c:choose>
-            	<span>${nickNameList[i]}</span>
-            	</td>
-            	<td>
-            	<span>${reviewList[i].getReviewText()}</span>
-            	<c:set var="nickName" value="${sessionScope.nickName}" />
-                  <c:if test="${nickNameList[i] eq nickName }">
-                  	<button type="button" class="${i} deleteReview"" onclick="deleteFunk();">수정</button>
-                     <button type="button" class="${i} deleteReview"" onclick="deleteFunk();">삭제</button>
-                  </c:if>
-            	</td>
-            </tr>
-            </c:forEach>
+	            <c:forEach var="i" begin="0" end="${fn:length(reviewList) - 1}">
+		            <tr>
+		            	<td style="width:20%;">
+		            	<c:choose>
+						    <c:when test="${nickNameGrade[i] eq '메추리알'}">
+		        	    		<img style="width: 20px;" src="../img/egg/egg1.png">
+		    				</c:when>
+		    				<c:when test="${nickNameGrade[i] eq '계란'}">	
+		        	    		<img style="width: 20px;" src="../img/egg/egg2.png">
+		    				</c:when>
+		    				<c:when test="${nickNameGrade[i] eq '타조알'}">
+		        	    		<img style="width: 20px;" src="../img/egg/egg3.png">
+		    				</c:when>
+		    				<c:otherwise>
+		    					<img style="width: 20px;" src="../img/egg/egg4.png">
+		   			 		</c:otherwise>
+						</c:choose>
+		            	<span>${nickNameList[i]}</span>
+		            	</td>
+		            	<td>
+		            	<span>${reviewList[i].getReviewText()}</span>
+		            	<c:set var="nickName" value="${sessionScope.nickName}" />
+		                  <c:if test="${nickNameList[i] eq nickName }">
+		                  	<button type="button" class="${i} deleteReview"" onclick="deleteFunk();">수정</button>
+		                     <button type="button" class="${i} deleteReview"" onclick="deleteFunk();">삭제</button>
+		                  </c:if>
+		            	</td>
+		            </tr>
+	            </c:forEach>
             </c:if>
       </table>
 </div>
@@ -233,7 +233,7 @@ width:138px;
   </div>
   
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=zaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
       defer
     ></script>
 <script>

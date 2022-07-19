@@ -42,7 +42,7 @@
           <a class="nav-link text-dark" href="/rsrs/login/mypage.jsp">마이페이지</a>
         </li>
         <li class="nav-item">
-           <%=session.getAttribute("userId") %>님 환영합니다!
+           <%=session.getAttribute("nickName") %>님 환영합니다!
         </li>
         <li class="nav-item">
           <a class="nav-link color-primary" href="/rsrs/login/logout">로그아웃</a>
