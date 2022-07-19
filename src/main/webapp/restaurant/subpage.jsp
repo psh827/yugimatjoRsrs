@@ -63,6 +63,7 @@ width:138px;
 	background: #ffb459;
     border: 1px solid #ffc68c;
     border-radius: 10px;
+    color: white;
 }
 .add-review-btn a {color:white;}
 
@@ -210,20 +211,29 @@ width:138px;
     					<img style="width: 20px;" src="../img/egg/egg4.png">
    			 		</c:otherwise>
 				</c:choose>
-            	${nickName[i]}
+            	<span>${nickNameList[i]}</span>
             	</td>
-            	<td>${reviewList[i].getReviewText()}</td>
+            	<td>
+            	<span>${reviewList[i].getReviewText()}</span>
+            	<c:set var="nickName" value="${sessionScope.nickName}" />
+                  <c:if test="${nickNameList[i] eq nickName }">
+                  	<button type="button" class="${i} deleteReview"" onclick="deleteFunk();">수정</button>
+                     <button type="button" class="${i} deleteReview"" onclick="deleteFunk();">삭제</button>
+                  </c:if>
+            	</td>
             </tr>
             </c:forEach>
             </c:if>
       </table>
 </div>
       </div>
+ <div class="add-review-btn-box">
+  <button class="add-review-btn" type="button" id="btnList">목록으로</button >  
   </div>
-  <button type="button" id="btnList">목록으로</button >
+  </div>
   
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ40&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400&callback=initMap&v=weekly"
       defer
     ></script>
 <script>
@@ -246,14 +256,20 @@ width:138px;
     	});
       
     }
+    
+    console.log("hello")
+    
     $(".btn-primary").click(function(){
         $(this).next().children(".am-star").toggleClass("on");
      });
     $("#btnList").click(function(){
     	var url = decodeURI("/rsrs/main/search_result.do?resCapacity=${resCapacity}인&foodType=${foodType}&resLocation1=${resLocation1}&resLocation2=${resLocation2}")
-    	console.log(url)
         location.href=url;
     });
+    function deleteFunk(){
+    	var who = $(this).parents();
+        console.log(who)
+    }
     
  </script>
 

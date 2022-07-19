@@ -64,7 +64,7 @@ public class ViewSubPage extends HttpServlet {
 		
 		request.setAttribute("restaurant", s);
 		request.setAttribute("reviewList", list);
-		request.setAttribute("nickName", nickNameList);
+		request.setAttribute("nickNameList", nickNameList);
 		request.setAttribute("resName", resName);
 		request.setAttribute("nickNameGrade", nickNameGrade);
 		request.setAttribute("lng", lng);
