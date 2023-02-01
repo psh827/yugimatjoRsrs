@@ -22,7 +22,7 @@ public class GoogleApi {
 				MediaType mediaType = MediaType.parse("text/plain");
 				RequestBody body = RequestBody.create(mediaType, "");
 				HttpUrl base = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/findplacefromtext/test");
-				HttpUrl link = base.resolve("json?input=" + resName + "&inputtype=textquery&fields=formatted_address%2Cname%2Cprice_level%2Crating%2Copening_hours%2Cgeometry&key=zaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400");
+				HttpUrl link = base.resolve("json?input=" + resName + "&inputtype=textquery&fields=formatted_address%2Cname%2Cprice_level%2Crating%2Copening_hours%2Cgeometry&key=zaS");
 				Request request = new Request.Builder()
 				  .url(link)
 				  .method("GET", null)
@@ -56,7 +56,7 @@ public class GoogleApi {
 				MediaType mediaType = MediaType.parse("text/plain");
 				RequestBody body = RequestBody.create(mediaType, "");
 				HttpUrl base = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/findplacefromtext/test");
-				HttpUrl link = base.resolve("json?input=" + resName + "&inputtype=textquery&fields=formatted_address%2Cname%2Cprice_level%2Crating%2Copening_hours%2Cgeometry&key=zaSyDnHdrBDEvUp0BRbUiKE1vhmWclLRRZ400");
+				HttpUrl link = base.resolve("json?input=" + resName + "&inputtype=textquery&fields=formatted_address%2Cname%2Cprice_level%2Crating%2Copening_hours%2Cgeometry&key=za");
 				Request request = new Request.Builder()
 				  .url(link)
 				  .method("GET", null)
